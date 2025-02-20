@@ -2,14 +2,11 @@
 
 import createClient from '@azure-rest/ai-vision-image-analysis';
 import {AzureKeyCredential} from "@azure/core-auth";
-import {revalidatePath} from "next/cache";
 
 
-// TODO: Env-variablber?
-// const endpoint = process.env['VISION_ENDPOINT'];
-// const key = process.env['VISION_KEY'];
-const endpoint = 'https://olav-cv-test.cognitiveservices.azure.com/';
-const key = 'TODO';
+const endpoint = process.env['VISION_ENDPOINT'];
+const key = process.env['VISION_KEY'];
+
 
 const credential = new AzureKeyCredential(key);
 const client = createClient(endpoint, credential);
