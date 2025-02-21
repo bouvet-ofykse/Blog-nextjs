@@ -1,11 +1,14 @@
-
+'use server';
 
 import createClient from '@azure-rest/ai-vision-image-analysis';
 import {AzureKeyCredential} from "@azure/core-auth";
 
 
-const endpoint = process.env['VISION_ENDPOINT'];
-const key = process.env['VISION_KEY'];
+const endpoint = process.env.VISION_ENDPOINT;
+const key = process.env.VISION_KEY;
+
+console.log('endpoint', endpoint);
+console.log('key', key);
 
 
 const credential = new AzureKeyCredential(key);
