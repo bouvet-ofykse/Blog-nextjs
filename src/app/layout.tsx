@@ -2,6 +2,7 @@ import type {Metadata} from "next";
 import {Geist, Geist_Mono} from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/nav-bar";
+import Footer from "@/components/footer";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -30,16 +31,12 @@ export default function RootLayout({
             <link rel="preconnect" href="https://fonts.gstatic.com"/>
             <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet"/>
         </head>
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-amber-50 dark:bg-slate-900 text-blue-950 dark:text-white flex flex-col min-h-screen`} >
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-amber-50 dark:bg-gray-900 text-blue-950 dark:text-white flex flex-col min-h-screen`} >
         <NavBar></NavBar>
-        <div id='content' className='mx-16 my-12'>
+        <div id='content' className='mx-16 my-12 flex-1'>
             {children}
         </div>
-        <footer className='w-full h-32 border-t-2 max--h-32'>
-            <div className='mx-16 mt-auto'>
-                DETTE ER FOOTER
-            </div>
-        </footer>
+        <Footer />
         </body>
         </html>
     );
