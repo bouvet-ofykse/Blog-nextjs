@@ -28,7 +28,11 @@ export default function GameBoard() {
     }, []);
 
     const handleChoice = (card: Card) => {
-        choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
+        if (choiceOne) {
+            setChoiceTwo(card)
+        } else {
+            setChoiceOne(card)
+        }
     }
 
     useEffect(() => {

@@ -1,5 +1,5 @@
 
-type post = {
+export type Post = {
     title : string,
     date : string,
     author : string,

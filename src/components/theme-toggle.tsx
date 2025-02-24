@@ -1,10 +1,6 @@
 "use client"
 
-import Image from "next/image";
-import lightModeIcon from "@/content/icons/light-theme.svg";
-import darkModeIcon from "@/content/icons/dark-theme.svg";
 import {useEffect, useState} from "react";
-
 
 export default function ThemeToggle() {
 
