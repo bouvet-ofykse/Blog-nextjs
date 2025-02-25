@@ -2,10 +2,11 @@ import path from "node:path";
 import fs from "fs";
 import matter from "gray-matter";
 import {notFound} from "next/navigation";
+import {Post} from '@/types/post.type';
 
 const postsDir = path.join(process.cwd(), 'src/posts');
 
-export const getPost = (slug: string): post => {
+export const getPost = (slug: string): Post => {
     const fileNames = fs.readdirSync(postsDir);
 
     const post = fileNames.find((fileName) => fileName === `${slug}.md`);
@@ -30,7 +31,7 @@ export const getPost = (slug: string): post => {
 }
 
 
-export const getAllposts = () : post[] => {
+export const getAllposts = () : Post[] => {
     const fileNames = fs.readdirSync(postsDir);
     return fileNames.filter(fileName => fileName.endsWith('.md')).map(fileName => {
 

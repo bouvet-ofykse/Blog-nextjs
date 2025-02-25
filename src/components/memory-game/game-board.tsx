@@ -56,6 +56,7 @@ export default function GameBoard() {
         }
         if (cards.filter(card => card.matched).length === cards.length) { // Win condition
             // Handle winning the game
+            handleNewGameClick();
         }
     }, [choiceOne, choiceTwo])
 

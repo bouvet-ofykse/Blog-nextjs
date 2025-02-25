@@ -6,7 +6,7 @@
 // import {analyzeImageFromUrl} from "@/actions/images";
 //
 //
-// export default function ImageAnalysisPage() {
+export default function ImageAnalysisPage() {
 //
 //
 //     const [analysis, setAnalysis] = useState(undefined)
@@ -44,4 +44,10 @@
 //             </ul>
 //         </>
 //     );
-// }
+
+    return (
+        <p>
+            Still in development 👨‍💻
+        </p>
+    );
+}

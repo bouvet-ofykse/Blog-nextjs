@@ -3,10 +3,10 @@ import markdownit from 'markdown-it';
 import {notFound} from "next/navigation";
 
 
-export default async function BlogPost({params}: { params: { slug: string } }) {
+export default async function BlogPost(props: { params: Promise<{ slug: string[] }> }) {
 
-    const { slug } = params;
-    const post = getPost(slug)
+    const { slug } = await props.params;
+    const post = getPost(slug[0]);
 
     if (!post) {
         notFound();
