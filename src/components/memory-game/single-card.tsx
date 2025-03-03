@@ -3,7 +3,6 @@ import Image from "next/image";
 import Cardback from '../../../public/memory-game/cardback.webp';
 import {Card} from "@/types/card.type";
 import styles from './single-card.module.css';
-import {useState} from "react";
 
 interface SingleCardProps {
     card: Card;
