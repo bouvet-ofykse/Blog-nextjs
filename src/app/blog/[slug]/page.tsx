@@ -17,8 +17,8 @@ export default async function BlogPost(props: { params: Promise<{ slug: string[]
 
     return (
         <article>
-            <h1 className='text-5xl mb-2'>{post.title}</h1>
-            <p className='italic mb-5'>{post.date} by {post.author}</p>
+            <h1>{post.title}</h1>
+            <p>{post.date} by {post.author}</p>
             <div className='article-content' dangerouslySetInnerHTML={{__html: convertedContent}}></div>
         </article>
     );

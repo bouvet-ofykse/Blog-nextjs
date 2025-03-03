@@ -3,7 +3,7 @@ export default function Home() {
     return (
         <main>
 
-            <h1 className='text-3xl mb-8'>Hallo, lager litt innhold bare for å se hvordan dette ser ut.</h1>
+            <h1>Hallo, lager litt innhold bare for å se hvordan dette ser ut.</h1>
 
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip

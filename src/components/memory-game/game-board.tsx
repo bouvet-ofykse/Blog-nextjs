@@ -4,6 +4,7 @@ import SingleCard from "@/components/memory-game/single-card";
 import {Card} from "@/types/card.type";
 import {CARDS} from '@/lib/memory-cards'
 import {useEffect, useState} from "react";
+import styles from './game-board.module.css';
 
 export default function GameBoard() {
 
@@ -77,14 +78,13 @@ export default function GameBoard() {
     }
 
     return (
-        <div id='gameBoard'>
-            <section
-                className='w-2/3 mx-auto mb-6 flex flex-row justify-between bg-gray-300 dark:bg-gray-700  p-4 rounded-lg items-center'>
-                <p className='text-gray-800 dark:text-gray-200'>Turns: {turns}</p>
-                <p className='text-gray-800 dark:text-gray-200'>Score: {score}</p>
-                <button onClick={handleNewGameClick} className=' border-gray-600 border-2 bg-white p-2 dark:bg-gray-400 dark:text-gray-800 dark:border-none rounded-lg'>New game</button>
+        <div>
+            <section>
+                <p>Turns: {turns}</p>
+                <p>Score: {score}</p>
+                <button onClick={handleNewGameClick}>New game</button>
             </section>
-            <div className='w-2/3 mx-auto grid grid-cols-6 grid-rows-4 justify-between'>
+            <div className={styles['game-board']}>
                 {cards.map((card) => (
                     <SingleCard
                         key={card.id}

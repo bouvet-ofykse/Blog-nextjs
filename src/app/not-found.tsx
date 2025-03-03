@@ -1,9 +1,9 @@
 export default function NotFound() {
 
     return (
-        <div className='flex flex-col items-center justify-center'>
-            <span className='text-3xl mb-5'>\(o_o)/</span>
-            <h1>Sorry, we could not find the page you are looking for...</h1>
+        <div className='error-container'>
+            <h1>\(o_o)/</h1>
+            <h2>Sorry, we could not find the content you are looking for...</h2>
         </div>
     );
 }

@@ -4,41 +4,84 @@
 
 
 :root {
-  --background: #FEFCE8;
-  --foreground: #00004d;
+    --background: #FEFCE8;
+    --foreground: #212121;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #FEFCE8;
-    --foreground: #ededed;
-  }
-}
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+    color: var(--foreground);
+    background: var(--background);
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 3rem;
+    display: flex;
+    min-height: 90vh;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+@media (max-width: 720px) {
+    body {
+        color: var(--foreground);
+        background: var(--background);
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0.1rem;
+        display: flex;
+        min-height: 90vh;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+}
+
+h4 {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+}
+
+.error-container {
+    margin-top: 8rem;
+    justify-items: center;
+}
+
+
+
+#main-content {
+    padding: 3rem;
 }
 
 .article-content p {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 .article-content h1 {
-  font-size: 2rem;
+    font-size: 2rem;
 }
 
 .article-content h2 {
-  font-size: 1.5rem;
+    font-size: 1.5rem;
 }
 
 .article-content h3 {
-  font-size: 1.2rem;
+    font-size: 1.2rem;
 }
 
 .article-content pre {
-  background-color: #90a1b9;
-  width: min-content;
+    background-color: #90a1b9;
+    width: min-content;
 }

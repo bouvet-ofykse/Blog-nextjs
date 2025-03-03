@@ -25,7 +25,7 @@ export default function ImageAnalysisPage() {
 //
 //     return (
 //         <>
-//             <h1 className='text-3xl mb-3'>
+//             <h1>
 //                 Image analysis
 //             </h1>
 //             <p>Upload an image to analyze</p>
@@ -46,8 +46,8 @@ export default function ImageAnalysisPage() {
 //     );
 
     return (
-        <p>
+        <h1>
             Still in development 👨‍💻
-        </p>
+        </h1>
     );
 }

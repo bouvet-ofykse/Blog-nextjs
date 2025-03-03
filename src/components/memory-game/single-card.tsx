@@ -2,7 +2,8 @@
 import Image from "next/image";
 import Cardback from '../../../public/memory-game/cardback.webp';
 import {Card} from "@/types/card.type";
-
+import styles from './single-card.module.css';
+import {useState} from "react";
 
 interface SingleCardProps {
     card: Card;
@@ -20,9 +21,11 @@ export default function SingleCard({ card, handleChoice, cardFlipped, disabled }
     }
 
     return(
-        <div className='w-100 h-100 mx-auto my-4 rounded-lg'>
-            {cardFlipped && <Image priority={true} src={card.img} alt='Card front' onClick={handleClick} className='rounded-md accent-gray-300 bg-gray-300 dark:bg-gray-200 p-6 cursor-pointer' width={128} height={128}/>}
-            {!cardFlipped && <Image priority={true} src={Cardback} alt='Card back' onClick={handleClick} className='rounded-md cursor-pointer' width={128} height={128} />}
+        <div className={styles['card-inner']}>
+            {cardFlipped && <Image priority={true} src={card.img} alt='Card front' onClick={handleClick}
+                                   className={styles['card-front']} width={128} height={128}/>}
+            {!cardFlipped && <Image priority={true} src={Cardback} alt='Card back' onClick={handleClick}
+                                    className={styles['card-back']} width={128} height={128}/>}
         </div>
     );
 }

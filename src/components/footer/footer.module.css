@@ -1,0 +1,13 @@
+
+.footer {
+    margin-top: auto;
+    border-top: 1px solid;
+    padding-top: 1rem;
+    position: relative;
+}
+
+.footer span {
+    margin-left: 3rem;
+    margin-right: 3rem;
+    font-style: italic;
+}

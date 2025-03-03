@@ -9,15 +9,15 @@ export default function BlogPosts() {
     console.log(posts);
     return (
         <>
-            <h1 className='text-3xl mb-3'>
+            <h1>
                 Blog
             </h1>
 
             <ul>
                 {posts.map(post => {
-                    return (<li key={post.slug} className='flex flex-col w-100'>
-                        <Link href={`/blog/${post.slug}`} className='flex justify-between' >
-                            <span className='hover:underline text-xl'>{post.title}</span><span className='italic justify-end'>{post.date}</span>
+                    return (<li key={post.slug}>
+                        <Link href={`/blog/${post.slug}`} >
+                            <span>{post.title}</span><span>{post.date}</span>
                         </Link>
 
                     </li>)

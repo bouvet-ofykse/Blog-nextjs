@@ -1,7 +1,7 @@
 import type {Metadata} from "next";
 import "./globals.css";
-import NavBar from "@/components/nav-bar";
-import Footer from "@/components/footer";
+import NavBar from "@/components/nav-bar/nav-bar";
+import Footer from "@/components/footer/footer";
 
 
 export const metadata: Metadata = {
@@ -16,12 +16,12 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-        <head>
-
+        <head title='Olav Fykse'>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         </head>
-        <body className='antialiased bg-amber-50 dark:bg-gray-900 text-blue-950 dark:text-white flex flex-col min-h-screen' >
+        <body id='body'>
         <NavBar></NavBar>
-        <div id='content' className='mx-16 my-12 flex-1'>
+        <div id='main-content'>
             {children}
         </div>
         <Footer />

@@ -1,0 +1,41 @@
+
+
+.header {
+
+}
+
+
+.hero {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+.hero-img  {
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.nav-bar {
+    height: 2rem;
+}
+
+.nav-bar-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.nav-bar-item {
+    margin-right: 1rem;
+    padding: 0.3rem;
+}
+
+.nav-bar-item:hover {
+    border-bottom: 0.2rem solid black;
+}
+
+.nav-bar-item-active {
+    border-bottom: 0.2rem solid black;
+}
