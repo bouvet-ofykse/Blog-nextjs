@@ -20,8 +20,6 @@ export default function NavBar() {
                     <NavbarItem name='Archive' path={'/blog'} />
                     <NavbarItem name='Image Analysis' path='/image-analysis' />
                     <NavbarItem name='Memory Game' path='/memory-game' />
-
-
                     <li>
                         <Link href='https://github.com/bouvet-ofykse' target='_blank'>
                             <Image src={githubIcon.src} width={24} height={24} priority={true} alt='GitHub icon'
