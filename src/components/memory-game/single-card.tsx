@@ -3,6 +3,7 @@ import Image from "next/image";
 import Cardback from '../../../public/memory-game/cardback.webp';
 import {Card} from "@/types/card.type";
 import styles from './single-card.module.css';
+import React from "react";
 
 interface SingleCardProps {
     card: Card;
@@ -10,6 +11,8 @@ interface SingleCardProps {
     cardFlipped: boolean;
     disabled: boolean;
 }
+
+
 
 export default function SingleCard({ card, handleChoice, cardFlipped, disabled }: SingleCardProps) {
 

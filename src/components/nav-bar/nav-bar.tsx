@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import githubIcon from '@/content/icons/github.svg'
-import ThemeToggle from "@/components/theme-toggle";
 import profileImage from '@/content/profile.png';
 import styles from './nav-bar.module.css'
 import NavbarItem from "@/components/nav-bar/nav-bar-item";
@@ -26,7 +25,7 @@ export default function NavBar() {
                                    className='hover:fill-amber-200'/>
                         </Link>
                     </li>
-                    <li><ThemeToggle/></li>
+                    {/*<li><ThemeToggle/></li>*/}
                 </ul>
             </nav>
         </header>

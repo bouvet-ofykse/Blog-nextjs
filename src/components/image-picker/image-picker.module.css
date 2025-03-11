@@ -1,0 +1,15 @@
+
+.main {
+    display: flex;
+    flex-direction: row;
+}
+
+.placeholder {
+    width: 400px;
+    height: 400px;
+    display: flex;
+    margin-right: 2rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid grey;
+}
