@@ -5,6 +5,7 @@ import {Card} from "@/types/card.type";
 import {CARDS} from '@/lib/memory-cards'
 import {useEffect, useState} from "react";
 import styles from './game-board.module.css';
+import WinModal from "@/components/memory-game/win-modal";
 
 export default function GameBoard() {
 
@@ -12,7 +13,8 @@ export default function GameBoard() {
 
     const [cards, setCards] = useState<Card[]>([]);
     const [turns, setTurns] = useState<number>(0);
-    const [score, setScore] = useState<number>(0);
+    const [matches, setMatches] = useState<number>(0);
+    const [gameWon, setGameWon] = useState<boolean>(false);
     const [choiceOne, setChoiceOne] = useState<Card | undefined>(undefined);
     const [choiceTwo, setChoiceTwo] = useState<Card | undefined>(undefined);
     const [disabled, setDisabled] = useState(false);
@@ -25,7 +27,7 @@ export default function GameBoard() {
     useEffect(() => {
         shuffleCards();
         setTurns(0);
-        setScore(0);
+        setMatches(0);
     }, []);
 
     const handleChoice = (card: Card) => {
@@ -40,7 +42,7 @@ export default function GameBoard() {
         if (choiceOne && choiceTwo && choiceOne?.id !== choiceTwo.id) {
             setDisabled(true);
             if (choiceOne.id === choiceTwo.matchId || choiceTwo.id === choiceOne.matchId) { // is match
-                setScore(score + 1);
+                setMatches(matches + 1);
                 setCards(prevCards => {
                     return prevCards.map((card) => {
                         if (card.img === choiceOne.img) {
@@ -55,19 +57,24 @@ export default function GameBoard() {
                 setTimeout(() => resetTurn(), 1000);
             }
         }
-        if (cards.filter(card => card.matched).length === cards.length) { // Win condition
+        if (cards.filter(card => card.matched).length === cards.length && cards.length !== 0) { // Win condition
             // Handle winning the game
-            handleNewGameClick();
+            setGameWon(true);
+            console.log('game won');
+            console.log('matched:', cards.filter(card => card.matched).length);
+            console.log('all:', cards.length);
+            // handleNewGameClick();
         }
     }, [choiceOne, choiceTwo])
 
     function handleNewGameClick() {
         shuffleCards();
         setTurns(0);
-        setScore(0);
+        setMatches(0);
         setChoiceOne(undefined);
         setChoiceTwo(undefined);
         setDisabled(false);
+        setGameWon(false);
     }
 
     const resetTurn = () => {
@@ -79,10 +86,10 @@ export default function GameBoard() {
 
     return (
         <div>
-            <section>
+            <section className={styles.scoreboard}>
                 <p>Turns: {turns}</p>
-                <p>Score: {score}</p>
-                <button onClick={handleNewGameClick}>New game</button>
+                <p>Matches: {matches}</p>
+                <button className={styles.button} onClick={handleNewGameClick}>New game</button>
             </section>
             <div className={styles['game-board']}>
                 {cards.map((card) => (
@@ -94,6 +101,7 @@ export default function GameBoard() {
                         disabled={disabled}
                     />))}
             </div>
+            {gameWon && <WinModal show={gameWon} matches={matches} turns={turns} onRestart={handleNewGameClick} />}
         </div>
     );
 }
