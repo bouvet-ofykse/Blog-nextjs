@@ -41,5 +41,6 @@
 }
 
 .button:hover {
-    background-color: #0059c1;
+    color: #64C0A2FF;
+    border: 1px solid #64C0A2FF;
 }
