@@ -39,6 +39,21 @@ export default function GameBoard() {
         }
     }, []);
 
+    useEffect(() => {
+        const preloadImages = async () => {
+            const promises = CARDS.map((card) => {
+                const img = new Image();
+                img.src = card.img;
+                return new Promise((res) => {
+                    img.onload = res;
+                });
+            });
+            await Promise.all(promises);
+        };
+
+        preloadImages();
+    }, []);
+
     const handleChoice = (card: Card) => {
         if (choiceOne) {
             setChoiceTwo(card)

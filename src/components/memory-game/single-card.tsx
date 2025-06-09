@@ -24,8 +24,8 @@ export default function SingleCard({ card, handleChoice, cardFlipped, disabled }
 
     return(
         <>
-            {cardFlipped && <Image priority src={card.img} alt='Card front' onClick={handleClick} className={styles['card-front']} width={80} height={80}/>}
-            {!cardFlipped && <Image priority src={Cardback} alt='Card back' onClick={handleClick} className={styles['card-back']} width={128} height={128} />}
+            {cardFlipped && <Image src={card.img} alt='Card front' onClick={handleClick} className={styles['card-front']} width={80} height={80}/>}
+            {!cardFlipped && <Image src={Cardback} alt='Card back' onClick={handleClick} className={styles['card-back']} width={128} height={128} />}
         </>
     );
 }
