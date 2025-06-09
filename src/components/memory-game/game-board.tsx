@@ -7,6 +7,7 @@ import {useEffect, useState} from "react";
 import styles from './game-board.module.css';
 import WinModal from "@/components/memory-game/win-modal";
 
+
 export default function GameBoard() {
 
     const unshuffeledCards: Card[] = CARDS;
@@ -15,6 +16,7 @@ export default function GameBoard() {
     const [turns, setTurns] = useState<number>(0);
     const [matches, setMatches] = useState<number>(0);
     const [gameWon, setGameWon] = useState<boolean>(false);
+    const [highscore, setHighScore] = useState<number>(0);
     const [choiceOne, setChoiceOne] = useState<Card | undefined>(undefined);
     const [choiceTwo, setChoiceTwo] = useState<Card | undefined>(undefined);
     const [disabled, setDisabled] = useState(false);
@@ -28,6 +30,13 @@ export default function GameBoard() {
         shuffleCards();
         setTurns(0);
         setMatches(0);
+
+        const savedScore = getCookie('HighScore');
+        console.log('saved score', savedScore);
+        if (savedScore) {
+
+            setHighScore(parseInt(savedScore, 10));
+        }
     }, []);
 
     const handleChoice = (card: Card) => {
@@ -60,10 +69,12 @@ export default function GameBoard() {
         if (cards.filter(card => card.matched).length === cards.length && cards.length !== 0) { // Win condition
             // Handle winning the game
             setGameWon(true);
-            console.log('game won');
-            console.log('matched:', cards.filter(card => card.matched).length);
-            console.log('all:', cards.length);
-            // handleNewGameClick();
+
+            if (highscore === 0 || turns < highscore) {
+                setHighScore(turns);
+                setCookie('HighScore', turns.toString());
+            }
+
         }
     }, [choiceOne, choiceTwo])
 
@@ -87,9 +98,10 @@ export default function GameBoard() {
     return (
         <div>
             <section className={styles.scoreboard}>
-                <p>Turns: {turns}</p>
-                <p>Matches: {matches}</p>
-                <button className={styles.button} onClick={handleNewGameClick}>New game</button>
+                <p className={styles.stats}>Turns: {turns}</p>
+                <p className={styles.stats}>Matches: {matches}</p>
+                <p className={styles.stats}>Highscore: {highscore}</p>
+                <button className={styles.button} onClick={handleNewGameClick}>Restart</button>
             </section>
             <div className={styles['game-board']}>
                 {cards.map((card) => (
@@ -104,4 +116,18 @@ export default function GameBoard() {
             {gameWon && <WinModal show={gameWon} matches={matches} turns={turns} onRestart={handleNewGameClick} />}
         </div>
     );
+}
+
+function getCookie(name: string): string | null {
+    const cookies = document.cookie.split('; ').reduce((acc: Record<string, string>, current) => {
+        const [key, value] = current.split('=');
+        acc[key] = value;
+        return acc;
+    }, {});
+
+    return cookies[name] ? decodeURIComponent(cookies[name]) : null;
+}
+function setCookie(name: string, value: string, days = 365) {
+    const expires = new Date(Date.now() + days * 864e5).toUTCString();
+    document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
 }
