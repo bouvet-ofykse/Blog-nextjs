@@ -1,7 +1,8 @@
 
 
 .header {
-
+    background: #2A7B9B;
+    background: linear-gradient(90deg,rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%);
 }
 
 
@@ -10,6 +11,9 @@
     flex-direction: row;
     align-items: center;
     font-size: 1.5rem;
+    margin-top: 1rem;
+    margin-left: 2rem;
+
 }
 
 .hero-img  {
@@ -18,13 +22,15 @@
 }
 
 .nav-bar {
-    height: 2rem;
+    /*height: 2rem;*/
+
 }
 
 .nav-bar-items {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+    margin-right: 2rem;
 }
 
 .nav-bar-item {

@@ -1,5 +1,7 @@
 import {getAllposts} from "@/lib/posts";
 import Link from "next/link";
+import styles from './page.module.css';
+
 
 
 export default function BlogPosts() {
@@ -16,11 +18,13 @@ export default function BlogPosts() {
             <ul>
                 {posts.map(post => {
                     return (<li key={post.slug}>
-                        <Link href={`/blog/${post.slug}`} >
-                            <span>{post.title}</span><span>{post.date}</span>
-                        </Link>
+                        <div className={styles.row}>
+                            <Link href={`/blog/${post.slug}`}>
+                                <span className={styles.title}>{post.title} ({post.date})</span>
+                            </Link>
+                        </div>
 
-                    </li>)
+                    </li>);
                 })}
             </ul>
 
