@@ -40,9 +40,9 @@
 
 
 .button {
-  background-color: #ffffff;
-  color: #2a715a;
-  border: 1px solid #2a715a;
+  color: var(--foreground-light);
+  background-color: var(--background-light);
+  border: 1px solid var(--foreground-light);
   padding: 0.6rem 1.2rem;
   border-radius: 0.5rem;
   cursor: pointer;
@@ -50,8 +50,7 @@
 }
 
 .button:hover {
-  color: #64C0A2FF;
-  border: 1px solid #64C0A2FF;
+  background-color: #ffffff;
 }
 
 .stats {
