@@ -6,8 +6,8 @@ import styles from './page.module.css';
 export default function BlogPosts() {
 
     const posts = getAllposts()
+    const postsSorted = posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-    console.log(posts);
     return (
         <>
             <h1>
@@ -15,7 +15,7 @@ export default function BlogPosts() {
             </h1>
 
             <ul>
-                {posts.map(post => {
+                {postsSorted.map(post => {
                     return (<li key={post.slug}>
                         <div className={styles.row}>
                             <Link href={`/blog/${post.slug}`}>
@@ -26,8 +26,6 @@ export default function BlogPosts() {
                     </li>);
                 })}
             </ul>
-
-
         </>
     );
 }

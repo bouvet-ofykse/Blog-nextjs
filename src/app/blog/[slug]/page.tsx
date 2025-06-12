@@ -1,16 +1,14 @@
-import {getPost} from "@/lib/posts";
+import {notFound} from 'next/navigation';
 import markdownit from 'markdown-it';
-import {notFound} from "next/navigation";
+import {getPost} from '@/lib/posts';
 
+export default async function BlogPost({ params, }: { params: Promise<{ slug: string }>;}) {
+    const { slug } = await params;
 
-export default async function BlogPost(props: { params: Promise<{ slug: string[] }> }) {
+    console.log('slug', slug);
 
-    const { slug } = await props.params;
-    const post = getPost(slug[0]);
-
-    if (!post) {
-        notFound();
-    }
+    const post = getPost(slug);
+    if (!post) notFound();
 
     const md = markdownit();
     const convertedContent = md.render(post.content);
@@ -19,7 +17,7 @@ export default async function BlogPost(props: { params: Promise<{ slug: string[]
         <article>
             <h1>{post.title}</h1>
             <p>{post.date} by {post.author}</p>
-            <div className='article-content' dangerouslySetInnerHTML={{__html: convertedContent}}></div>
+            <div dangerouslySetInnerHTML={{__html: convertedContent}}/>
         </article>
     );
-}
+};
