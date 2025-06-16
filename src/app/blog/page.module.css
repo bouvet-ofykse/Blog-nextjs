@@ -7,6 +7,9 @@
     padding-bottom: 0.5rem;
     padding-top: 0.5rem;
     border-bottom: 1px solid var(--foreground-light);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    margin-bottom: 1rem;
 }
 
 :global(body.dark) .row {
@@ -14,12 +17,16 @@
 }
 
 .date {
-    font-size: 0.8rem;
-    font-decoration: italic;
+    font-size: 0.9rem;
 }
 
 .title {
     font-size: 1.2rem;
     font-weight: bold;
     margin-right: 1.5rem;
+}
+
+.tags {
+    font-style: italic;
+    font-size: 0.9rem;
 }

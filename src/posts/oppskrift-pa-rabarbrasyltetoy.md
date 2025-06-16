@@ -9,6 +9,9 @@ draft: true
 tags:
   - mat
   - oppskrift
+  - rabarbra
+  - syltetøy
+ 
 description:
   Oppskrift for å lage enkelt og digg rabarbrasylteøy.
 ---

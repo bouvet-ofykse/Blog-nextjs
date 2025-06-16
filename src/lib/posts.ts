@@ -19,12 +19,15 @@ export const getPost = (slug: string): Post | null => {
     const {content, data} = matter(fileContent);
 
     return {
-        title: data.title,
-        date: data.date,
-        author: data.author,
-        slug,
-        content,
-        ...data
+        title : data.title,
+        date : data.date,
+        author : data.author,
+        slug: slug,
+        featured: data.featured ?? false,
+        draft: data.draft ?? true,
+        tags: data.tags ?? [],
+        description: data.description,
+        content: content
     };
 
 }
@@ -34,19 +37,22 @@ export const getAllposts = () : Post[] => {
     const fileNames = fs.readdirSync(postsDir);
     return fileNames.filter(fileName => fileName.endsWith('.md')).map(fileName => {
 
-        const slug = fileName.replace(/\.md$/, ''); // TODO: get slug from the content of the file, not from the file name
+        const slug = fileName.replace(/\.md$/, '');
         const filePath = path.join(postsDir, fileName);
         const fileContent = fs.readFileSync(filePath, 'utf8');
 
         const {content, data} = matter(fileContent);
 
         return {
-            title: data.title,
-            date: data.date,
-            author: data.author,
-            slug,
-            content,
-            ...data
+            title : data.title,
+            date : data.date,
+            author : data.author,
+            slug: slug,
+            featured: data.featured ?? false,
+            draft: data.draft ?? true,
+            tags: data.tags ?? [],
+            description: data.description,
+            content: content
         };
     })
 }

@@ -16,14 +16,19 @@ export default function BlogPosts() {
 
             <ul>
                 {postsSorted.map(post => {
-                    return (<li key={post.slug}>
-                        <div className={styles.row}>
+                    return (
+                        <li key={post.slug} className={styles.row}>
                             <Link href={`/blog/${post.slug}`}>
-                                <span className={styles.title}>{post.title} ({post.date})</span>
+                                <span className={styles.title}>{post.title}</span>
                             </Link>
-                        </div>
+                            <span className={styles.date}>{new Date(post.date).toLocaleDateString()} by {post.author}</span>
+                            {post.tags && post.tags.length > 0 &&
+                                <span className={styles.tags}>
+                                    {post.tags.join(', ')}
+                                </span>
+                            }
 
-                    </li>);
+                        </li>);
                 })}
             </ul>
         </>

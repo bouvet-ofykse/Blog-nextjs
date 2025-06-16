@@ -78,6 +78,11 @@ a {
     color: var(--foreground-light);
 }
 
+:global(body.dark) a {
+    text-decoration: none;
+    color: var(--silver);
+}
+
 .error-container {
     margin-top: 8rem;
     justify-items: center;
