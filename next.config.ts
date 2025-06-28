@@ -1,15 +1,20 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
-};
-
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
     experimental: {
         serverActions: {
             bodySizeLimit: '5mb',
         },
     },
-}
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'static-cdn.jtvnw.net',
+                port: '',
+                pathname: '/**',
+            },
+        ],
+    },
+};
 
-export default nextConfig;
+module.exports = nextConfig;

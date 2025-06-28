@@ -13,6 +13,7 @@ const navItems = [
     { name: 'Archive', path: '/blog' },
     { name: 'Image analyzer', path: '/image-analysis' },
     { name: 'Emoji memory', path: '/memory-game' },
+    { name: 'Twitch drops', path: '/twitch-drops' },
 ];
 
 export default function Navbar() {
