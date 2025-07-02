@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Game } from "@/types/twitch-drops/game.type";
 import styles from "./game-modal.module.css";
 import Image from "next/image";
+import Link from "next/link";
 
 type Props = {
     game: Game | null;
@@ -24,25 +25,40 @@ export default function GameModal({ game, onClose }: Props) {
         <div className={styles.backdrop} onClick={onClose}>
             <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
                 <button onClick={onClose} className={styles.close}>×</button>
-                <h2>{game.gameDisplayName}</h2>
-                <img src={game.gameBoxArtURL} alt={game.gameDisplayName} className={styles.image} />
+                <div className={styles.modalHeader}>
+                    <Image src={game.gameBoxArtURL} alt={game.gameDisplayName} width={120} height={160} />
+                    <div className={styles.headerDetails}>
+                        <h2>{game.gameDisplayName}</h2>
+                        <h3>{game.rewards[0].name}</h3>
+
+                        <p className={styles.campaignEnd}>
+                            Campaign ends in {Math.round((new Date(game.endAt).getTime() - Date.now()) / (1000 * 60 * 60))} hours
+                        </p>
+                        <p>{game.rewards[0].description}</p>
+                        <p><Link href={game.rewards[0].detailsURL} target='_blank'>Check out the full details 🔗</Link><br/>
+                        <Link href={game.rewards[0].accountLinkURL} target='_blank'>Link account 🔗</Link></p>
+
+                    </div>
+                </div>
 
                 {game.rewards?.length ? (
                     <div className={styles.rewards}>
                         <h3>Drops & Rewards</h3>
                         {game.rewards.map((reward) => (
                             <div key={reward.id} className={styles.reward}>
-                                <p><strong>{reward.name}</strong></p>
                                 {reward.timeBasedDrops.map((drop) => (
                                     <div key={drop.id} className={styles.drop}>
-                                        <p></p>
-                                        <p>🎁 <strong>{drop.name}</strong></p>
-                                        <Image src={drop.benefitEdges[0].benefit.imageAssetURL} alt='Drop reward' width={160} height={160}/>
-                                        <p>Requirement: Watch {drop.requiredMinutesWatched} minutes</p>
-                                        <p>
-                                            {new Date(drop.startAt).toLocaleDateString()}{' '}{new Date(drop.startAt).toLocaleTimeString()}{" - "}
-                                            {new Date(drop.endAt).toLocaleDateString()}{' '}{new Date(drop.endAt).toLocaleTimeString()}
-                                        </p>
+
+                                        <div className={styles.dropWrapper}>
+                                            <Image src={drop.benefitEdges[0].benefit.imageAssetURL} alt='Drop reward' width={75} height={75}/>
+                                            <div className={styles.rewardDetails}>
+                                                <p><strong>{drop.name}</strong></p>
+                                                <p className={styles.dropDetails}>
+                                                    Watch {drop.requiredMinutesWatched} minutes.
+                                                </p>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 ))}
                             </div>

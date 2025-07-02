@@ -32,8 +32,8 @@ export default function Games({ games }: { games: Game[] }) {
 
                         <GameCard
                             title={game.gameDisplayName}
-                            description={`Campaign ends in ${Math.round((new Date(game.endAt).getTime() - Date.now()) / (1000 * 60 * 60))} hours`}
-                            rewards={`${game.rewards.length} reward(s) available`}
+                            description={`Campaign ends in ~ ${Math.round((new Date(game.endAt).getTime() - Date.now()) / (1000 * 60 * 60))} hours`}
+                            rewards={`${game.rewards[0].timeBasedDrops.length} ${game.rewards[0].timeBasedDrops.length === 1 ? 'reward' : 'rewards'} available`}
                             image={game.gameBoxArtURL}
                         />
                     </div>
