@@ -23,7 +23,7 @@ export default async function Page() {
             <h1>🎮 Active Twitch Drops</h1>
             <p>
                 Stay up to date with the latest active Twitch Drops across various games — all in one place. This page
-                shows currently live drops that you can claim by watching Twitch streams U+F1C5.
+                shows currently live drops that you can claim by watching Twitch streams.
             </p>
             <p>
                 Drop data is powered by the Sunkwi Twitch Drops API. Big thanks to the contributors for making this
