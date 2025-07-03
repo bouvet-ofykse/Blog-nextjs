@@ -1,6 +1,6 @@
 
 import { getTwitchDrops } from "@/actions/sunkwi";
-import GamesLayout from "@/components/twitch-drops/games";
+import GameLayout from "@/components/twitch-drops/game-layout/game-layout";
 
 export default async function Page() {
 
@@ -33,7 +33,7 @@ export default async function Page() {
                 🚧 This page is still under development, so expect some changes and improvements in the future.
             </p>
 
-            <GamesLayout games={games}/>
+            <GameLayout games={games}/>
         </main>
     );
 }

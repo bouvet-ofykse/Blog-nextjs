@@ -10,6 +10,24 @@ type Props = {
     onClose: () => void;
 };
 
+function formatWatchTime(minutes: number): string {
+    const hours = Math.floor(minutes / 60);
+    const remainderMinutes = minutes % 60;
+    if (hours === 0) {
+        return `${minutes} minutes`
+    }
+    if (minutes === 0) {
+        return `${minutes} minutes`
+    }
+    if (remainderMinutes === 0) {
+        if (hours === 1) {
+            return `${hours} hour`;
+        }
+        return `${hours} hours`;
+    }
+    return `${hours}h ${remainderMinutes}m`;
+}
+
 export default function GameModal({ game, onClose }: Props) {
     useEffect(() => {
         const handleKey = (e: KeyboardEvent) => {
@@ -54,7 +72,7 @@ export default function GameModal({ game, onClose }: Props) {
                                             <div className={styles.rewardDetails}>
                                                 <p><strong>{drop.name}</strong></p>
                                                 <p className={styles.dropDetails}>
-                                                    Watch {drop.requiredMinutesWatched} minutes.
+                                                    Watch for {formatWatchTime(drop.requiredMinutesWatched)}
                                                 </p>
                                             </div>
 
