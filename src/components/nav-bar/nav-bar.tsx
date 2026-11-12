@@ -13,7 +13,7 @@ const navItems = [
     { name: 'Blogg', path: '/blog' },
     { name: 'Mat', path: '/recipes' },
     { name: 'Bildeanalyse', path: '/image-analysis' },
-    { name: 'Huskespill', path: '/memory-game' },
+    { name: 'Emoji-Memory', path: '/memory-game' },
     { name: 'Twitch Drops', path: '/twitch-drops' },
 ];
 

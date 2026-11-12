@@ -51,7 +51,6 @@ export default function RecipesPage() {
                                 <span className={styles.cardDescription}>{recipe.description}</span>
                                 <span className={styles.cardFooter}>
                                     {recipe.servings}
-                                    <span className={styles.arrow} aria-hidden="true">↗</span>
                                 </span>
                             </span>
                         </Link>

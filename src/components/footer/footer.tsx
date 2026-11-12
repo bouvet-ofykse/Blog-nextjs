@@ -5,7 +5,7 @@ export default function Footer() {
     return (
         <footer className={styles.footer}>
             <div>
-                <span>Laget med Next.js og React · © {new Date().getFullYear()} Olav Fykse</span>
+                <span>Laget med NextJS og React · © {new Date().getFullYear()} Olav Fykse</span>
             </div>
         </footer>
     );
