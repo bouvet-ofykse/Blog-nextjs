@@ -20,6 +20,40 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Writing blog posts
+
+Posts live in `src/posts` as Markdown files. The filename becomes the URL slug.
+Set `title`, `date` (`YYYY-MM-DD`) and `author` in the YAML frontmatter.
+Use `##` and lower for headings; the page already renders the title as an `h1`.
+
+To show a cover image on the blog overview, add an optional `image` field to the
+frontmatter, for example `image: '/blog/images/azure-foundry.png'`, and place the
+file at `public/blog/images/azure-foundry.png`. Images fill the card's image area
+and are cropped to fit. Posts without an image keep the default `{ }` artwork.
+
+Use fenced code blocks with a language such as `csharp`, `typescript`, `json` or
+`bash` for syntax highlighting. Unknown languages and blocks without a language
+are displayed as plain text. Code blocks and tables scroll horizontally on small
+screens.
+
+````markdown
+```csharp
+Console.WriteLine("Hei!");
+```
+
+![Describe what the image shows](/images/blog/example.png)
+
+> A quotation or note.
+
+| Feature | Supported |
+| --- | --- |
+| Markdown tables | Yes |
+````
+
+For the image example, place the file at `public/images/blog/example.png`.
+Images automatically scale to the article width while keeping their aspect ratio.
+Use descriptive alt text for accessibility. Raw HTML is disabled in posts.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

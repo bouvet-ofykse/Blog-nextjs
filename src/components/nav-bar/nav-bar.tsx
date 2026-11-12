@@ -28,14 +28,14 @@ export default function Navbar() {
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark') {
             setDarkMode(true);
-            document.body.classList.add('dark');
+            document.documentElement.classList.add('dark');
         } else if (savedTheme === 'light') {
             setDarkMode(false);
-            document.body.classList.remove('dark');
+            document.documentElement.classList.remove('dark');
         } else {
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             setDarkMode(prefersDark);
-            document.body.classList.toggle('dark', prefersDark);
+            document.documentElement.classList.toggle('dark', prefersDark);
         }
         setMounted(true);
     }, []);
@@ -43,7 +43,7 @@ export default function Navbar() {
     // Update body class and localStorage when darkMode changes
     useEffect(() => {
         if (!mounted) return; // Skip initial run before mount
-        document.body.classList.toggle('dark', darkMode);
+        document.documentElement.classList.toggle('dark', darkMode);
         localStorage.setItem('theme', darkMode ? 'dark' : 'light');
     }, [darkMode, mounted]);
 

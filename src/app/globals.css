@@ -20,7 +20,7 @@
     --gold: #c79b0a;
 }
 
-body.dark {
+:root.dark {
     color-scheme: dark;
     --background: #19171c;
     --surface: #222027;

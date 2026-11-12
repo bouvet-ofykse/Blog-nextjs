@@ -20,7 +20,7 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     text-align: center;
 }
-:global(body.dark) .modal {
+:global(:root.dark) .modal {
     background-color: var(--background-dark);
     color: var(--foreground-dark);
     padding: 2rem;

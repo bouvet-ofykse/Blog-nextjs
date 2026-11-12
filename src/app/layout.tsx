@@ -16,7 +16,17 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="nb">
+        <html lang="nb" suppressHydrationWarning>
+        <head>
+        <script id="theme-init" dangerouslySetInnerHTML={{ __html: `(() => {
+                const theme = localStorage.getItem("theme");
+                const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                document.documentElement.classList.toggle(
+                    "dark",
+                    theme === "dark" || ((!theme || theme === "system") && prefersDark)
+                );
+            })();` }} />
+        </head>
         <body id='body'>
         <NavBar></NavBar>
         <div id='main-content'>

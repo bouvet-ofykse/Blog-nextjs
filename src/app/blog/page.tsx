@@ -1,5 +1,6 @@
 import {getAllposts} from "@/lib/posts";
 import Link from "next/link";
+import Image from "next/image";
 import styles from './page.module.css';
 
 
@@ -22,7 +23,17 @@ export default function BlogPosts() {
                         <li key={post.slug} className={styles.row}>
                             <Link href={`/blog/${post.slug}`} className={styles.postLink}>
                                 <span className={styles.artwork} aria-hidden="true">
-                                    <span className={styles.artworkIcon}>{'{ }'}</span>
+                                    {post.image ? (
+                                        <Image
+                                            src={post.image}
+                                            alt=""
+                                            fill
+                                            sizes="(max-width: 600px) 100vw, (max-width: 920px) 50vw, 360px"
+                                            className={styles.coverImage}
+                                        />
+                                    ) : (
+                                        <span className={styles.artworkIcon}>{'{ }'}</span>
+                                    )}
                                 </span>
                                 <div className={styles.cardBody}>
                                     <span className={styles.date}>

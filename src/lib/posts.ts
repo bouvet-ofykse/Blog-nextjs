@@ -27,6 +27,7 @@ export const getPost = (slug: string): Post | null => {
         draft: data.draft ?? true,
         tags: data.tags ?? [],
         description: data.description,
+        image: data.image,
         content: content
     };
 
@@ -52,6 +53,7 @@ export const getAllposts = () : Post[] => {
             draft: data.draft ?? true,
             tags: data.tags ?? [],
             description: data.description,
+            image: data.image,
             content: content
         };
     })

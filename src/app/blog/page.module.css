@@ -55,13 +55,19 @@
 }
 
 .artwork {
+    position: relative;
     display: flex;
     min-height: 170px;
+    flex-shrink: 0;
     align-items: center;
     justify-content: center;
     background:
         radial-gradient(ellipse at 75% 15%, rgb(255 255 255 / 54%), transparent 38%),
         linear-gradient(135deg, var(--accent-soft), var(--background));
+}
+
+.coverImage {
+    object-fit: cover;
 }
 
 .artworkIcon {

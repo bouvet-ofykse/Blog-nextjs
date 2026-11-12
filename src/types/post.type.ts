@@ -8,6 +8,7 @@ export type Post = {
     draft: boolean;
     tags?: string[];
     description?: string;
+    image?: string;
     content: string;
 
 }

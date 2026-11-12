@@ -90,7 +90,7 @@
     margin: 0.25rem 0;
 }
 
-:global(body.dark) .drop {
+:global(:root.dark) .drop {
     border-left-color: var(--accent);
 }
 
