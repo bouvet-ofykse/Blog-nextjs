@@ -9,11 +9,11 @@ import Image from "next/image";
 import profilepic from '@/content/profile.png';
 
 const navItems = [
-    { name: 'Home', path: '/' },
-    { name: 'Archive', path: '/blog' },
-    { name: 'Image analyzer', path: '/image-analysis' },
-    { name: 'Emoji memory', path: '/memory-game' },
-    { name: 'Twitch drops', path: '/twitch-drops' },
+    { name: 'Hjem', path: '/' },
+    { name: 'Blogg', path: '/blog' },
+    { name: 'Bildeanalyse', path: '/image-analysis' },
+    { name: 'Huskespill', path: '/memory-game' },
+    { name: 'Twitch Drops', path: '/twitch-drops' },
 ];
 
 export default function Navbar() {
@@ -57,10 +57,11 @@ export default function Navbar() {
         <header className={styles.header}>
             <div className={styles.container}>
                 <Link href="/" className={styles.logo}>
-                    <Image src={profilepic} alt='Profile picture' width={70} height={70} className={styles.hero} />
+                    <Image src={profilepic} alt="" width={42} height={42} className={styles.hero} />
+                    <span>Olav Fykse</span>
                 </Link>
 
-                <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ''}`}>
+                <nav id="primary-navigation" className={`${styles.nav} ${menuOpen ? styles.navOpen : ''}`}>
                     {navItems.map((item) => (
                         <Link
                             key={item.path}
@@ -76,18 +77,14 @@ export default function Navbar() {
                 <div className={styles.controls}>
                     <button
                         onClick={() => setDarkMode((prev) => !prev)}
-                        aria-label="Toggle dark mode"
+                        aria-label={darkMode ? 'Bytt til lys modus' : 'Bytt til mørk modus'}
+                        aria-pressed={darkMode}
                         className={styles.themeToggle}
                     >
                         {darkMode &&
-                        <i className={'bx bx-sun ' + styles.ThemeIconSun + ' ' + styles.icon }
-                            aria-hidden="true"
-                        /> }
+                        <i className="bx bx-sun" aria-hidden="true" /> }
                         {!darkMode &&
-                        <i
-                            className={'bx bx-moon ' + styles.ThemeIconMoon + ' '  + styles.icon}
-                            aria-hidden="true"
-                        />
+                        <i className="bx bx-moon" aria-hidden="true" />
                         }
                     </button>
                     <a
@@ -102,10 +99,12 @@ export default function Navbar() {
 
                     <button
                         onClick={() => setMenuOpen((prev) => !prev)}
-                        aria-label="Toggle menu"
+                        aria-label={menuOpen ? 'Lukk meny' : 'Åpne meny'}
+                        aria-expanded={menuOpen}
+                        aria-controls="primary-navigation"
                         className={styles.hamburger}
                     >
-                        ☰
+                        <i className={`bx ${menuOpen ? 'bx-x' : 'bx-menu'}`} aria-hidden="true" />
                     </button>
                 </div>
             </div>

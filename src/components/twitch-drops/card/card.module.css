@@ -2,14 +2,14 @@
 
 
 .card {
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border);
     width: 200px;
     border-radius: 0.75rem;
-    border-color: var(--foreground-light);
+    border-color: var(--border);
     overflow: hidden;
     background-color: var(--background-light);
     color: var(--foreground-light);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    box-shadow: var(--shadow);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     height: 100%;
     display: flex;
@@ -20,7 +20,7 @@
 
 .card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--shadow);
     cursor: pointer;
 }
 

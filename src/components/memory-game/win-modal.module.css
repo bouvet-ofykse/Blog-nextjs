@@ -52,5 +52,5 @@
 }
 
 .button:hover {
-    background-color: #ffffff;
+    background-color: var(--accent-soft);
 }

@@ -17,15 +17,28 @@ interface SingleCardProps {
 export default function SingleCard({ card, handleChoice, cardFlipped, disabled }: SingleCardProps) {
 
     const handleClick = () => {
-        if (!disabled) {
+        if (!disabled && !card.matched) {
             handleChoice(card);
         }
     }
 
     return(
-        <>
-            {cardFlipped && <Image src={card.img} alt='Card front' onClick={handleClick} className={styles['card-front']} width={80} height={80}/>}
-            {!cardFlipped && <Image src={Cardback} alt='Card back' onClick={handleClick} className={styles['card-back']} width={128} height={128} />}
-        </>
+        <button
+            type="button"
+            className={`${styles.card} ${cardFlipped ? styles.isFlipped : ''} ${card.matched ? styles.isMatched : ''}`}
+            onClick={handleClick}
+            disabled={disabled || card.matched}
+            aria-label={cardFlipped ? 'Vendt kort' : 'Skjult kort'}
+            aria-pressed={cardFlipped}
+        >
+            <span className={styles.cardInner}>
+                <span className={`${styles.face} ${styles.front}`} aria-hidden="true">
+                    <Image src={Cardback} alt="" fill sizes="(max-width: 600px) 30vw, (max-width: 900px) 22vw, 140px" />
+                </span>
+                <span className={`${styles.face} ${styles.back}`} aria-hidden="true">
+                    <Image src={card.img} alt="" fill sizes="(max-width: 600px) 30vw, (max-width: 900px) 22vw, 140px" />
+                </span>
+            </span>
+        </button>
     );
 }

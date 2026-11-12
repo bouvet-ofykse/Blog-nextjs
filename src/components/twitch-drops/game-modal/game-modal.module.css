@@ -13,8 +13,9 @@
 }
 
 .modal {
-    background: white;
-    color: #000;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--foreground);
     padding: 2rem;
     border-radius: 10px;
     max-width: 50vh;
@@ -61,7 +62,7 @@
 
 .rewards {
     margin-top: 1.5rem;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid var(--border);
     padding-top: 1rem;
 }
 
@@ -89,8 +90,8 @@
     margin: 0.25rem 0;
 }
 
-body.dark .drop {
-    border-left-color: #60a5fa;
+:global(body.dark) .drop {
+    border-left-color: var(--accent);
 }
 
 .dropDetails {

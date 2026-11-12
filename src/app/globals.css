@@ -1,86 +1,120 @@
-
-
-@font-face { font-family: myriad-pro;
-    src: url('../content/myriad-pro/MyriadPro-Light.otf'); }
-
 :root {
-    --background-light: #E3E4DB;
-    --foreground-light: #3B252C;
-    --purple: #8F6593;
-    --rose-quartz: #AEA4BF;
-    --silver: #CDCDCD;
-    --gold: #c79b0a;
-    --background-dark: #312e38;
-    --foreground-dark: #CDCDCD;
-}
+    color-scheme: light;
+    --background: #f6f5f2;
+    --surface: #fff;
+    --foreground: #29262d;
+    --muted: #716d76;
+    --border: #e5e2e8;
+    --accent: #72577f;
+    --accent-soft: #eee8f0;
+    --focus-ring: #967aa3;
+    --shadow: 0 16px 40px rgb(34 27 38 / 7%);
 
+    --background-light: var(--surface);
+    --foreground-light: var(--foreground);
+    --background-dark: var(--surface);
+    --foreground-dark: var(--foreground);
+    --purple: var(--accent);
+    --rose-quartz: #aea4bf;
+    --silver: #d3ced7;
+    --gold: #c79b0a;
+}
 
 body.dark {
-    background-color: var(--background-dark);
-    color: var(--foreground-dark);
+    color-scheme: dark;
+    --background: #19171c;
+    --surface: #222027;
+    --foreground: #f1eef3;
+    --muted: #aaa3b0;
+    --border: #39343e;
+    --accent: #c8add2;
+    --accent-soft: #302936;
+    --focus-ring: #d6b8e0;
+    --shadow: 0 16px 40px rgb(0 0 0 / 24%);
+
+    --background-light: var(--surface);
+    --foreground-light: var(--foreground);
+    --background-dark: var(--surface);
+    --foreground-dark: var(--foreground);
+    --silver: #d3ced7;
 }
 
+* {
+    box-sizing: border-box;
+}
 
-
+html {
+    scroll-behavior: smooth;
+}
 
 body {
-    font-family: myriad-pro;
-    color: var(--foreground-light);
-    background: var(--background-light);
-    /*font-family: Arial, Helvetica, sans-serif;*/
-    /*margin: 3rem;*/
     display: flex;
-    min-height: 90vh;
+    min-height: 100vh;
     flex-direction: column;
-    justify-content: flex-start;
     margin: 0;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+    transition: background-color 180ms ease, color 180ms ease;
 }
 
-@media (max-width: 720px) {
-    body {
-        color: var(--foreground-light);
-        background: var(--background-light);
-        font-family: Arial, Helvetica, sans-serif;
-        /*margin: 0.1rem;*/
-        display: flex;
-        min-height: 90vh;
-        flex-direction: column;
-        justify-content: flex-start;
-    }
+button,
+input {
+    font: inherit;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 3px;
+}
+
+::selection {
+    background: var(--accent-soft);
+    color: var(--foreground);
+}
+
+h1,
+h2,
+h3,
+h4 {
+    color: var(--foreground);
+    line-height: 1.2;
 }
 
 h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+    font-size: clamp(2rem, 5vw, 3rem);
+    letter-spacing: -0.045em;
+    margin: 0 0 1rem;
 }
 
 h2 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-}
-
-h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0.3rem;
-}
-
-h4 {
-    font-size: 1rem;
-    margin-bottom: 0.3rem;
+    font-size: clamp(1.35rem, 3vw, 1.8rem);
+    letter-spacing: -0.025em;
+    margin: 0 0 0.75rem;
 }
 
 li {
     list-style-type: none;
 }
 
-a {
-    text-decoration: none;
-    color: var(--foreground-light);
-}
-
-:global(body.dark) a {
-    text-decoration: none;
-    color: var(--silver);
+#main-content {
+    width: min(100% - 3rem, 1120px);
+    flex: 1;
+    margin: 0 auto;
+    padding: clamp(3rem, 8vw, 6rem) 0;
 }
 
 .error-container {
@@ -88,28 +122,33 @@ a {
     justify-items: center;
 }
 
-#main-content {
-    padding: 3rem;
-}
-
 .article-content p {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-}
-
-.article-content h1 {
-    font-size: 2rem;
-}
-
-.article-content h2 {
-    font-size: 1.5rem;
-}
-
-.article-content h3 {
-    font-size: 1.2rem;
+    margin: 1rem 0;
 }
 
 .article-content pre {
-    background-color: #90a1b9;
-    width: min-content;
+    max-width: 100%;
+    overflow-x: auto;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    background: var(--surface);
+}
+
+@media (max-width: 600px) {
+    #main-content {
+        width: min(100% - 2rem, 1120px);
+        padding: 3rem 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
 }

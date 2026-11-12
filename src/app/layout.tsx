@@ -7,7 +7,7 @@ import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
     title: "Olav Fykse",
-    description: "A personal journey to learn React and Nexjs",
+    description: "Prosjekter, notater og eksperimenter fra Olav Fykse.",
 };
 
 export default function RootLayout({
@@ -16,10 +16,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-        <head title='Olav Fykse'>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        </head>
+        <html lang="nb">
         <body id='body'>
         <NavBar></NavBar>
         <div id='main-content'>

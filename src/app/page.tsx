@@ -1,17 +1,73 @@
+import Link from 'next/link';
+import styles from './page.module.css';
 
 export default function Home() {
     return (
-        <main>
+        <main className={styles.home}>
+            <section className={styles.hero} aria-labelledby="intro-title">
+                <p className={styles.eyebrow}>
+                    <span className={styles.statusDot} aria-hidden="true" />
+                    Utvikler · kaffe i cache
+                </p>
+                <h1 id="intro-title">
+                    Hei, jeg er Olav.
+                    <span className={styles.headlineAccent}>Jeg får ting til å klikke.</span>
+                </h1>
+                <p className={styles.intro}>
+                    Helst med vilje. Her finner du prosjekter, små eksperimenter og ting jeg har lært
+                    underveis. Når noe ikke virker, kaller jeg det debugging — det høres i det minste
+                    planlagt ut.
+                </p>
+                <div className={styles.actions}>
+                    <Link href="/blog" className={styles.primaryAction}>
+                        Se hva som kompilerer <span aria-hidden="true">↗</span>
+                    </Link>
+                    <a
+                        href="https://github.com/bouvet-ofykse"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.secondaryAction}
+                    >
+                        Kikk i kodekjelleren
+                    </a>
+                </div>
+            </section>
 
-            <h1>Hallo, lager litt innhold bare for å se hvordan dette ser ut.</h1>
-
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                deserunt mollit anim id est laborum.</p>
-
+            <section className={styles.projects} aria-labelledby="projects-title">
+                <div className={styles.sectionHeading}>
+                    <div>
+                        <p className={styles.sectionLabel}>Utvalgte commits</p>
+                        <h2 id="projects-title">Små prosjekter, store ambisjoner</h2>
+                    </div>
+                    <span className={styles.sectionNote}>Bygget med vilje. For det meste.</span>
+                </div>
+                <div className={styles.projectGrid}>
+                    <Link href="/blog" className={styles.projectCard}>
+                        <span className={styles.projectNumber}>01 / BLOGG</span>
+                        <span className={styles.projectTitle}>Blogg: tankene er deployet</span>
+                        <span className={styles.projectDescription}>
+                            Notater, ideer og lærdommer — uten krav om at alt skal være production-ready.
+                        </span>
+                        <span className={styles.projectArrow} aria-hidden="true">↗</span>
+                    </Link>
+                    <Link href="/image-analysis" className={styles.projectCard}>
+                        <span className={styles.projectNumber}>02 / VERKTØY</span>
+                        <span className={styles.projectTitle}>Bildeanalyse: se saken fra flere sider</span>
+                        <span className={styles.projectDescription}>
+                            Et lite AI-eksperiment som prøver å se litt mer enn bare piksler.
+                        </span>
+                        <span className={styles.projectArrow} aria-hidden="true">↗</span>
+                    </Link>
+                    <Link href="/memory-game" className={styles.projectCard}>
+                        <span className={styles.projectNumber}>03 / LEK</span>
+                        <span className={styles.projectTitle}>Emoji-hukommelse: match made in memory</span>
+                        <span className={styles.projectDescription}>
+                            Et lite minnespill. Endelig en grunn til å stirre på emoji-er med konsentrasjon.
+                        </span>
+                        <span className={styles.projectArrow} aria-hidden="true">↗</span>
+                    </Link>
+                </div>
+            </section>
         </main>
-
     );
 }
