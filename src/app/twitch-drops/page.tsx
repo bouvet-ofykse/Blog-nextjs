@@ -2,13 +2,15 @@
 import { getTwitchDrops } from "@/actions/sunkwi";
 import GameLayout from "@/components/twitch-drops/game-layout/game-layout";
 
+export const dynamic = "force-dynamic";
+
 export default async function Page() {
+    let games: Awaited<ReturnType<typeof getTwitchDrops>>;
 
     try {
-        const games = await getTwitchDrops();
-        console.log('games', games);
+        games = await getTwitchDrops();
     } catch (error) {
-        console.log('error', error);
+        console.error("Failed to load Twitch Drops:", error);
         return (
             <main>
                 <h1>Error</h1>
@@ -16,21 +18,17 @@ export default async function Page() {
             </main>
         );
     }
-    const games = await getTwitchDrops();
 
     return (
         <main>
-            <h1>🎮 Active Twitch Drops</h1>
+            <h1>🎮 Aktive Twitch Drops</h1>
             <p>
-                Stay up to date with the latest active Twitch Drops across various games — all in one place. This page
-                shows currently live drops that you can claim by watching Twitch streams.
+                Hold deg oppdatert med de nyeste aktive Twitch Drops på tvers av ulike spill — alt på ett sted. Denne siden
+                er laget for å vise en oversikt over de Twitch-dropsene som er tilgjengelige akkurat nå
             </p>
             <p>
-                Drop data is powered by the Sunkwi Twitch Drops API. Big thanks to the contributors for making this
-                information available.
-            </p>
-            <p>
-                🚧 This page is still under development, so expect some changes and improvements in the future.
+                Dataene for Twitch Drops hentes fra Sunkwi Twitch Drops API. Stor takk til bidragsyterne for å gjøre denne
+                informasjonen tilgjengelig
             </p>
 
             <GameLayout games={games}/>

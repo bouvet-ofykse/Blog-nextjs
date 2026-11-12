@@ -60,9 +60,9 @@ export default function Home() {
                     </Link>
                     <Link href="/memory-game" className={styles.projectCard}>
                         <span className={styles.projectNumber}>03 / LEK</span>
-                        <span className={styles.projectTitle}>Emoji-hukommelse: match made in memory</span>
+                        <span className={styles.projectTitle}>Emoji-Memory: Et teit lite tidsfordriv</span>
                         <span className={styles.projectDescription}>
-                            Et lite minnespill. Endelig en grunn til å stirre på emoji-er med konsentrasjon.
+                            Enkel implementasjon av Memory. Laget for å lære React, emojier fordi jeg ikke kan tegne.
                         </span>
                         <span className={styles.projectArrow} aria-hidden="true">↗</span>
                     </Link>
