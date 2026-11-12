@@ -1,8 +1,15 @@
 ---
 title: 'Bygg din egen AI-agent med Microsoft Foundry'
-date: '2025-11-12'
+description:
+  En guide for å bygge din egen AI-agent med Microsoft Foundry.
+date: '2026-11-12'
 author: 'Olav Fykse'
+draft: false
 image: '/blog/images/azure-foundry.png'
+tags:
+  - AI
+  - Agent
+  - Microsoft Foundry
 ---
 
 

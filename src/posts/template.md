@@ -1,16 +1,13 @@
 ---
-
 title: 'Template post'
-date: '2025-02-04'
-author: 'Olav Fykse'
-slug: template
-featured: false
-draft: true
-tags:
-  - docs
 description:
-  Some rules & recommendations for creating or adding new posts using AstroPaper
-  theme.
+  Describe the post in a few sentences. This description will be used in the post excerpt and site description of the post.
+date: 'yyyy-MM-dd'
+author: 'Olav Fykse'
+draft: true
+#image: '/blog/images/azure-foundry.png'
+tags:
+  - Relevante søkeord for innlegget
 ---
 
 Here are some rules/recommendations, tips & ticks for creating new posts in AstroPaper blog theme.

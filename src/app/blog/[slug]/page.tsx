@@ -44,6 +44,11 @@ export default async function BlogPost({ params, }: { params: Promise<{ slug: st
                         </time>
                         {' · '}{post.author}
                     </p>
+                    {post.tags && post.tags.length > 0 && (
+                        <ul className={styles.tags} aria-label="Emneord">
+                            {post.tags.map(tag => <li key={tag} className={styles.tag}>{tag}</li>)}
+                        </ul>
+                    )}
                 </header>
                 <div className={styles.content} dangerouslySetInnerHTML={{__html: convertedContent}}/>
             </article>

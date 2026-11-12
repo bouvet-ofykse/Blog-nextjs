@@ -24,6 +24,8 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 Posts live in `src/posts` as Markdown files. The filename becomes the URL slug.
 Set `title`, `date` (`YYYY-MM-DD`) and `author` in the YAML frontmatter.
+Set `draft: false` to include a post in the blog overview. Posts with `draft: true`
+or no `draft` field are omitted from the overview, but remain accessible by URL.
 Use `##` and lower for headings; the page already renders the title as an `h1`.
 
 To show a cover image on the blog overview, add an optional `image` field to the

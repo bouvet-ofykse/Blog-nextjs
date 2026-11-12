@@ -6,7 +6,7 @@ import styles from './page.module.css';
 
 export default function BlogPosts() {
 
-    const posts = getAllposts()
+    const posts = getAllposts().filter(post => !post.draft);
     const postsSorted = posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
     return (
