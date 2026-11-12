@@ -14,8 +14,8 @@ export default function Home() {
                     <span className={styles.headlineAccent}>Dette er mitt lille hjørne av internett.</span>
                 </h1>
                 <p className={styles.intro}>
-                    Her samler jeg ting jeg lager, lærer og har lyst til å huske.
-                    Det blir litt kode, noen småprosjekter og litt oppskrifter på mat jeg har laget.
+                    Her samler jeg ting jeg lager, lærer og har lyst til å huske, evt dele.
+                    Litt om koding, noen småprosjekter og litt oppskrifter på mat jeg har laget.
                 </p>
                 <div className={styles.actions}>
                     <Link href="/blog" className={styles.primaryAction}>
@@ -35,7 +35,7 @@ export default function Home() {
             <section className={styles.projects} aria-labelledby="projects-title">
                 <div className={styles.sectionHeading}>
                     <div>
-                        <p className={styles.sectionLabel}>Utvalgte commits</p>
+                        <p className={styles.sectionLabel}>Utvalgte prosjekter</p>
                         <h2 id="projects-title">Små prosjekter, store ambisjoner</h2>
                     </div>
                     <span className={styles.sectionNote}>Bygget med vilje. For det meste.</span>
@@ -52,14 +52,14 @@ export default function Home() {
                         <span className={styles.projectNumber}>02 / LEK</span>
                         <span className={styles.projectTitle}>Emoji-Memory: Et teit lite tidsfordriv</span>
                         <span className={styles.projectDescription}>
-                            Enkel implementasjon av Memory. Laget for å lære React, emojier fordi jeg ikke kan tegne.
+                            Enkel implementasjon av Memory. Laget for å lære meg React, emojier fordi jeg ikke kan tegne.
                         </span>
                     </Link>
                     <Link href="/recipes" className={styles.projectCard}>
                         <span className={styles.projectNumber}>03 / Mat</span>
                         <span className={styles.projectTitle}>Oppskrifter: En samling retter jeg har laget</span>
                         <span className={styles.projectDescription}>
-                            Et forsøk på å huske ting jeg har laget
+                            Et forsøk på å huske hvordan jeg lagde all den gode maten.
                         </span>
                     </Link>
 

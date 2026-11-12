@@ -51,6 +51,17 @@ export default function RecipesPage() {
                                 <span className={styles.cardDescription}>{recipe.description}</span>
                                 <span className={styles.cardFooter}>
                                     {recipe.servings}
+                                    <span className={styles.date}>
+                                        Publisert{' '}
+                                        <time dateTime={recipe.date}>
+                                            {new Date(recipe.date).toLocaleDateString('nb-NO', {
+                                                day: 'numeric',
+                                                month: 'long',
+                                                year: 'numeric',
+                                                timeZone: 'UTC',
+                                            })}
+                                        </time>
+                                    </span>
                                 </span>
                             </span>
                         </Link>

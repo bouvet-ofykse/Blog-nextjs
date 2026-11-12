@@ -19,6 +19,17 @@ export default async function RecipePage({params}: {params: Promise<{slug: strin
                 <header className={styles.header}>
                     <p className={styles.eyebrow}>{recipe.category}</p>
                     <h1>{recipe.title}</h1>
+                    <p className={styles.date}>
+                        Publisert{' '}
+                        <time dateTime={recipe.date}>
+                            {new Date(recipe.date).toLocaleDateString('nb-NO', {
+                                day: 'numeric',
+                                month: 'long',
+                                year: 'numeric',
+                                timeZone: 'UTC',
+                            })}
+                        </time>
+                    </p>
                     <p className={styles.description}>{recipe.description}</p>
                     {recipe.image && (
                         <div className={styles.cover}>

@@ -41,6 +41,12 @@
     line-height: 1.75;
 }
 
+.date {
+    margin: 0 0 1rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
 .facts {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
