@@ -3,8 +3,7 @@ title: Navn på oppskriften
 description: Skriv en kort beskrivelse som vises i oppskriftsoversikten.
 date: '2026-01-01'
 category: Middag
-prepTime: 15 min
-cookTime: 30 min
+time: 45 min
 servings: 4 porsjoner
 difficulty: Enkel
 tags:

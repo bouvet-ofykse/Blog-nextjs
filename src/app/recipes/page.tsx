@@ -45,7 +45,7 @@ export default function RecipesPage() {
                             </span>
                             <span className={styles.cardBody}>
                                 <span className={styles.meta}>
-                                    {recipe.prepTime} forberedelse <span aria-hidden="true">·</span> {recipe.difficulty}
+                                    {recipe.time} <span aria-hidden="true">·</span> {recipe.difficulty}
                                 </span>
                                 <span className={styles.cardTitle}>{recipe.title}</span>
                                 <span className={styles.cardDescription}>{recipe.description}</span>

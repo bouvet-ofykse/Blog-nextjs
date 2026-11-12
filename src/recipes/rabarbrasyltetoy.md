@@ -1,21 +1,23 @@
 ---
 title: Rabarbrasyltetøy med jordbær
-description: Superenkelt, friskt rabarbrasyltetøy med jordbærgelé – fint på brødskiva eller til dessert.
+description: Superenkelt, friskt rabarbrasyltetøy med jordbærgelé – perfekt på brødskiva.
 date: '2026-11-12'
-category: Søtt og godt
-prepTime: Ca. 15 min
-cookTime: Ca. 45 min
-servings: Ca. 6 glass
+category: Syltetøy
+time: 60 min
+servings: Ca. 8 glass
 difficulty: Enkel
 tags:
-  - rabarbra
-  - syltetøy
-  - sommer
+  - Syltetøy
+  - Rabarbra
+  - Frukt
+  - Søtt
+  - Pålegg
+  - Sommer
 draft: false
-image: /recipes/images/jam.png
+image: /recipes/images/rabarbrasyltetoy.png
 ---
 
-Syrlig rabarbra og søt jordbærgelé er en enkel og god kombinasjon. Oppskriften gir omtrent fire glass.
+Verdens enkleste og diggeste rabarbrasyltetøy! Dette syltetøyet er superenkelt å lage, og smaker friskt og godt.
 
 ## Ingredienser
 

@@ -4,8 +4,7 @@ export type Recipe = {
     description: string;
     date: string;
     category: string;
-    prepTime: string;
-    cookTime: string;
+    time: string;
     servings: string;
     difficulty: string;
     tags: string[];

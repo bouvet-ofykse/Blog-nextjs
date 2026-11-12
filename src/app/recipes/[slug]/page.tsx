@@ -27,12 +27,8 @@ export default async function RecipePage({params}: {params: Promise<{slug: strin
                     )}
                     <div className={styles.facts} aria-label="Oppskriftsdetaljer">
                         <div className={styles.fact}>
-                            <span className={styles.factLabel}>Forberedelse</span>
-                            <span>{recipe.prepTime}</span>
-                        </div>
-                        <div className={styles.fact}>
-                            <span className={styles.factLabel}>Koketid</span>
-                            <span>{recipe.cookTime}</span>
+                            <span className={styles.factLabel}>Tid</span>
+                            <span>{recipe.time}</span>
                         </div>
                         <div className={styles.fact}>
                             <span className={styles.factLabel}>Mengde</span>
