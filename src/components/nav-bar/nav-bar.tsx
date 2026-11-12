@@ -11,6 +11,7 @@ import profilepic from '@/content/profile.png';
 const navItems = [
     { name: 'Hjem', path: '/' },
     { name: 'Blogg', path: '/blog' },
+    { name: 'Mat', path: '/recipes' },
     { name: 'Bildeanalyse', path: '/image-analysis' },
     { name: 'Huskespill', path: '/memory-game' },
     { name: 'Twitch Drops', path: '/twitch-drops' },
@@ -66,7 +67,7 @@ export default function Navbar() {
                         <Link
                             key={item.path}
                             href={item.path}
-                            className={`${styles.link} ${pathname === item.path ? styles.active : ''}`}
+                            className={`${styles.link} ${pathname === item.path || (item.path !== '/' && pathname.startsWith(`${item.path}/`)) ? styles.active : ''}`}
                             onClick={() => setMenuOpen(false)}
                         >
                             {item.name}

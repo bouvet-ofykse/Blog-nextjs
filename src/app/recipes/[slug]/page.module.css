@@ -1,0 +1,151 @@
+.page {
+    max-width: 780px;
+    margin: 0 auto;
+}
+
+.backLink {
+    display: inline-block;
+    margin-bottom: 2rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+    transition: color 160ms ease;
+}
+
+.backLink:hover {
+    color: var(--accent);
+}
+
+.header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2rem;
+}
+
+.eyebrow {
+    margin: 0 0 0.6rem;
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.header h1 {
+    margin-bottom: 0.8rem;
+}
+
+.description {
+    max-width: 620px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.1rem;
+    line-height: 1.75;
+}
+
+.facts {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+}
+
+.fact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 0.8rem;
+    background: var(--surface);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.factLabel {
+    color: var(--muted);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.cover {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    margin-top: 1.5rem;
+    border-radius: 0.9rem;
+    background: var(--accent-soft);
+}
+
+.cover img {
+    object-fit: cover;
+}
+
+.content {
+    padding: 1.25rem 0;
+}
+
+.content h2 {
+    margin-top: 2rem;
+}
+
+.content p,
+.content li {
+    color: var(--muted);
+    line-height: 1.8;
+}
+
+.content ul,
+.content ol {
+    padding-left: 1.4rem;
+}
+
+.content ul > li {
+    list-style-type: disc;
+}
+
+.content ol > li {
+    list-style-type: decimal;
+}
+
+.content li {
+    padding-left: 0.25rem;
+    margin: 0.4rem 0;
+}
+
+.content li::marker {
+    color: var(--accent);
+}
+
+.content blockquote {
+    margin: 1.5rem 0;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 0.6rem 0.6rem 0;
+    padding: 0.2rem 1rem;
+    background: var(--accent-soft);
+}
+
+.content blockquote p {
+    margin: 0.6rem 0;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0;
+}
+
+.tags li {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.3rem 0.7rem;
+    color: var(--muted);
+    font-size: 0.75rem;
+}
+
+@media (max-width: 600px) {
+    .facts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}

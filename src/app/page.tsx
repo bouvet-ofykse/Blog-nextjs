@@ -50,22 +50,23 @@ export default function Home() {
                         </span>
                         <span className={styles.projectArrow} aria-hidden="true">↗</span>
                     </Link>
-                    <Link href="/image-analysis" className={styles.projectCard}>
-                        <span className={styles.projectNumber}>02 / VERKTØY</span>
-                        <span className={styles.projectTitle}>Bildeanalyse: se saken fra flere sider</span>
-                        <span className={styles.projectDescription}>
-                            Et lite AI-eksperiment som prøver å se litt mer enn bare piksler.
-                        </span>
-                        <span className={styles.projectArrow} aria-hidden="true">↗</span>
-                    </Link>
                     <Link href="/memory-game" className={styles.projectCard}>
-                        <span className={styles.projectNumber}>03 / LEK</span>
+                        <span className={styles.projectNumber}>02 / LEK</span>
                         <span className={styles.projectTitle}>Emoji-Memory: Et teit lite tidsfordriv</span>
                         <span className={styles.projectDescription}>
                             Enkel implementasjon av Memory. Laget for å lære React, emojier fordi jeg ikke kan tegne.
                         </span>
                         <span className={styles.projectArrow} aria-hidden="true">↗</span>
                     </Link>
+                    <Link href="/recipes" className={styles.projectCard}>
+                        <span className={styles.projectNumber}>03 / Mat</span>
+                        <span className={styles.projectTitle}>Oppskrifter: En samling retter jeg har laget</span>
+                        <span className={styles.projectDescription}>
+                            Et forsøk på å huske ting jeg har laget
+                        </span>
+                        <span className={styles.projectArrow} aria-hidden="true">↗</span>
+                    </Link>
+
                 </div>
             </section>
         </main>
