@@ -1,4 +1,5 @@
 ﻿import Game from "@/components/games/bug-invaders/game";
+import styles from "./page.module.css";
 
 export const metadata = {
     title: "Bug Invaders | ofykse.no",
@@ -7,30 +8,18 @@ export const metadata = {
 
 export default function BugInvadersPage() {
     return (
-        <main>
-            <div style={{
-                maxWidth: "900px",
-                margin: "60px auto 20px",
-                padding: "0 20px",
-            }}>
-                <p style={{
-                    color: "#38e8a5",
-                    fontFamily: "monospace",
-                    fontSize: "12px",
-                    letterSpacing: "2px",
-                }}>
-                    OFYKSE.NO / ARCADE
-                </p>
-
+        <main className={styles.page}>
+            <header className={styles.header}>
+                <p className={styles.eyebrow}>Spill / Arcade</p>
                 <h1>Bug Invaders</h1>
-
-                <p>
-                    Your application is under attack.
-                    How long can you survive?
+                <p className={styles.intro}>
+                    Applikasjonen din er under angrep. Hvor lenge klarer du å holde feilene unna?
                 </p>
-            </div>
+            </header>
 
-            <Game />
+            <div className={styles.gamePanel}>
+                <Game />
+            </div>
         </main>
     );
 }

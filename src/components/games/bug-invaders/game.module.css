@@ -1,7 +1,7 @@
 ﻿.gameContainer {
     width: 100%;
     max-width: 900px;
-    margin: 40px auto;
+    margin: 0 auto;
     color: #e8f0ff;
     font-family: monospace;
 }
