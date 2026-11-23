@@ -146,50 +146,6 @@ export class GameEngine {
     }
 
 
-
-    private updatePlayer(deltaTime: number) {
-        const { player } = this.data;
-        const pointerX = this.input.getPointerPosition();
-
-        if (pointerX !== null) {
-            const targetX = Math.max(
-                0,
-                Math.min(
-                    GAME_WIDTH - player.width,
-                    pointerX - player.width / 2
-                )
-            );
-
-            // Smooth movement towards the finger
-            const smoothing = 1 - Math.exp(-18 * deltaTime);
-
-            player.x += (targetX - player.x) * smoothing;
-
-            return;
-        }
-
-        // Keyboard movement
-        if (
-            this.input.isPressed("arrowleft") ||
-            this.input.isPressed("a")
-        ) {
-            player.x -= player.speed * deltaTime;
-        }
-
-        if (
-            this.input.isPressed("arrowright") ||
-            this.input.isPressed("d")
-        ) {
-            player.x += player.speed * deltaTime;
-        }
-
-        player.x = Math.max(
-            0,
-            Math.min(GAME_WIDTH - player.width, player.x)
-        );
-    }
-
-
     private checkCollisions() {
         const result = checkProjectileEnemyCollision(
             this.data.projectiles,
