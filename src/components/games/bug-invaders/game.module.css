@@ -1,0 +1,150 @@
+﻿.gameContainer {
+    width: 100%;
+    max-width: 900px;
+    margin: 40px auto;
+    color: #e8f0ff;
+    font-family: monospace;
+}
+
+.gameHeader,
+.gameFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: #8291aa;
+    background: #0c1424;
+    border: 1px solid #1d2b42;
+}
+
+.gameHeader {
+    border-radius: 10px 10px 0 0;
+}
+
+.gameFooter {
+    border-radius: 0 0 10px 10px;
+}
+
+.statusDot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background: #38e8a5;
+    box-shadow: 0 0 8px #38e8a5;
+}
+
+.gameFrame {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: #080d19;
+    border-left: 1px solid #1d2b42;
+    border-right: 1px solid #1d2b42;
+}
+
+.pauseButton {
+    padding: 6px 12px;
+    border: 1px solid #33445f;
+    border-radius: 4px;
+    background: transparent;
+    color: #e8f0ff;
+    font-family: monospace;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.pauseButton:hover {
+    border-color: #38e8a5;
+    color: #38e8a5;
+}
+
+.gameContainer :global(.bugInvadersCanvas) {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+}
+
+.gameContainer :global(.gameOverlay) {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(8 13 25 / 85%);
+    backdrop-filter: blur(4px);
+}
+
+.gameContainer :global(.gameOverlayContent) {
+    width: 90%;
+    text-align: center;
+}
+
+.gameContainer :global(.gameEyebrow) {
+    margin-bottom: 16px;
+    color: #38e8a5;
+    font-size: 11px;
+    letter-spacing: 3px;
+}
+
+.gameContainer :global(.gameOverlayContent h1) {
+    margin: 0;
+    color: #e8f0ff;
+    font-size: clamp(26px, 5vw, 48px);
+    letter-spacing: 3px;
+}
+
+.gameContainer :global(.gameOverlayContent p) {
+    margin: 18px 0 28px;
+    color: #8291aa;
+    font-size: 14px;
+}
+
+.gameContainer :global(.gameButton) {
+    padding: 14px 30px;
+    border: 1px solid #38e8a5;
+    border-radius: 4px;
+    background: #38e8a5;
+    color: #08131a;
+    font-family: monospace;
+    font-weight: bold;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 150ms ease;
+}
+
+.gameContainer :global(.gameButton:hover) {
+    background: transparent;
+    color: #38e8a5;
+    box-shadow: 0 0 20px rgb(56 232 165 / 20%);
+}
+
+.gameContainer :global(.gameInstructions) {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 35px;
+    color: #8291aa;
+    font-size: 10px;
+}
+
+.gameContainer :global(.gameInstructions span:nth-child(odd)) {
+    color: #38e8a5;
+}
+
+@media (max-width: 600px) {
+    .gameHeader,
+    .gameFooter {
+        font-size: 9px;
+        padding: 10px;
+    }
+
+    .gameContainer :global(.gameInstructions) {
+        gap: 6px;
+        font-size: 8px;
+    }
+}
