@@ -3,14 +3,12 @@
 import SingleCard from "@/components/memory-game/single-card";
 import {Card} from "@/types/card.type";
 import {CARDS} from '@/lib/memory-cards'
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import styles from './game-board.module.css';
 import WinModal from "@/components/memory-game/win-modal";
 
 
 export default function GameBoard() {
-
-    const unshuffeledCards: Card[] = CARDS;
 
     const [cards, setCards] = useState<Card[]>([]);
     const [turns, setTurns] = useState<number>(0);
@@ -21,10 +19,16 @@ export default function GameBoard() {
     const [choiceTwo, setChoiceTwo] = useState<Card | undefined>(undefined);
     const [disabled, setDisabled] = useState(false);
 
-    function shuffleCards() {
-        const shuffeledCards = unshuffeledCards.sort(() => Math.random() - 0.5)
-        setCards(shuffeledCards);
-    }
+    const shuffleCards = useCallback(() => {
+        setCards([...CARDS].sort(() => Math.random() - 0.5));
+    }, []);
+
+    const resetTurn = useCallback(() => {
+        setChoiceOne(undefined);
+        setChoiceTwo(undefined);
+        setTurns(prevTurns => prevTurns + 1);
+        setDisabled(false);
+    }, []);
 
     useEffect(() => {
         shuffleCards();
@@ -37,7 +41,7 @@ export default function GameBoard() {
 
             setHighScore(parseInt(savedScore, 10));
         }
-    }, []);
+    }, [shuffleCards]);
 
     useEffect(() => {
         const preloadImages = async () => {
@@ -66,7 +70,7 @@ export default function GameBoard() {
         if (choiceOne && choiceTwo && choiceOne?.id !== choiceTwo.id) {
             setDisabled(true);
             if (choiceOne.id === choiceTwo.matchId || choiceTwo.id === choiceOne.matchId) { // is match
-                setMatches(matches + 1);
+                setMatches(previousMatches => previousMatches + 1);
                 setCards(prevCards => {
                     return prevCards.map((card) => {
                         if (card.img === choiceOne.img) {
@@ -81,17 +85,19 @@ export default function GameBoard() {
                 setTimeout(() => resetTurn(), 1000);
             }
         }
-        if (cards.filter(card => card.matched).length === cards.length && cards.length !== 0) { // Win condition
-            // Handle winning the game
-            setGameWon(true);
+    }, [choiceOne, choiceTwo, resetTurn])
 
-            if (highscore === 0 || turns < highscore) {
-                setHighScore(turns);
-                setCookie('HighScore', turns.toString());
-            }
-
+    useEffect(() => {
+        if (gameWon || cards.length === 0 || !cards.every(card => card.matched)) {
+            return;
         }
-    }, [choiceOne, choiceTwo])
+
+        setGameWon(true);
+        if (highscore === 0 || turns < highscore) {
+            setHighScore(turns);
+            setCookie('HighScore', turns.toString());
+        }
+    }, [cards, gameWon, highscore, turns]);
 
     function handleNewGameClick() {
         shuffleCards();
@@ -101,13 +107,6 @@ export default function GameBoard() {
         setChoiceTwo(undefined);
         setDisabled(false);
         setGameWon(false);
-    }
-
-    const resetTurn = () => {
-        setChoiceOne(undefined);
-        setChoiceTwo(undefined);
-        setTurns(prevTurns => prevTurns + 1);
-        setDisabled(false);
     }
 
     return (
