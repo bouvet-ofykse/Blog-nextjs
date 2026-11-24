@@ -23,10 +23,19 @@ export interface Projectile {
     speed: number;
 }
 
+export interface EnemyProjectile {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    speed: number;
+}
+
 export interface GameData {
     player: Player;
     enemies: Enemy[];
     projectiles: Projectile[];
+    enemyProjectiles: EnemyProjectile[];
     score: number;
     lives: number;
     state: GameState;

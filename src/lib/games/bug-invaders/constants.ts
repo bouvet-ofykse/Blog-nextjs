@@ -27,3 +27,11 @@ export const ENEMY_CONFIG = {
     horizontalGap: 20,
     verticalGap: 24,
 };
+
+export const ENEMY_PROJECTILE_CONFIG = {
+    width: 6,
+    height: 14,
+    speed: 260,
+    minShootInterval: 1.0,
+    maxShootInterval: 2.0,
+};

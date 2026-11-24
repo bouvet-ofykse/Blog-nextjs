@@ -18,6 +18,7 @@ export function renderGame(
     drawStars(ctx);
     drawPlayer(ctx, game);
     drawEnemies(ctx, game);
+    drawEnemyProjectiles(ctx, game);
     drawProjectiles(ctx, game);
     drawHUD(ctx, game);
 }
@@ -104,6 +105,28 @@ function drawEnemies(
 
         ctx.restore();
     });
+}
+
+function drawEnemyProjectiles(
+    ctx: CanvasRenderingContext2D,
+    game: GameData
+) {
+    ctx.save();
+
+    ctx.fillStyle = "#ff718d";
+    ctx.shadowColor = "#ff718d";
+    ctx.shadowBlur = 12;
+
+    game.enemyProjectiles.forEach((projectile) => {
+        ctx.fillRect(
+            projectile.x,
+            projectile.y,
+            projectile.width,
+            projectile.height
+        );
+    });
+
+    ctx.restore();
 }
 
 function drawProjectiles(

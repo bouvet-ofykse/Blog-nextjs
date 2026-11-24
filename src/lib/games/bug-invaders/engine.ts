@@ -2,11 +2,11 @@
     GAME_WIDTH,
     GAME_HEIGHT,
     PLAYER_CONFIG,
-    ENEMY_CONFIG,
+    ENEMY_CONFIG, ENEMY_PROJECTILE_CONFIG
 } from "./constants";
 import { checkProjectileEnemyCollision } from "./collision";
 
-import type { GameData, Enemy, Projectile } from "./types";
+import type {GameData, Enemy, Projectile, EnemyProjectile} from "./types";
 import { Input } from "./input";
 
 export function createGame(): GameData {
@@ -16,7 +16,6 @@ export function createGame(): GameData {
         width: PLAYER_CONFIG.width,
         height: PLAYER_CONFIG.height,
         speed: PLAYER_CONFIG.speed,
-        lives: PLAYER_CONFIG.startingLives
     };
 
     const enemies: Enemy[] = [];
@@ -46,6 +45,7 @@ export function createGame(): GameData {
         player,
         enemies,
         projectiles: [],
+        enemyProjectiles: [],
         lives: PLAYER_CONFIG.startingLives,
         score: 0,
         state: "playing",
@@ -58,6 +58,7 @@ export class GameEngine {
     private enemyDirection = 1;
     private enemySpeed = 35;
     private shootCooldown = 0;
+    private enemyShootCooldown = 1.5;
 
     constructor(input: Input) {
         this.input = input;
@@ -82,6 +83,38 @@ export class GameEngine {
         ) {
             this.shoot();
             this.shootCooldown = 0.25;
+        }
+
+        // Enemy shooting
+        this.enemyShootCooldown -= deltaTime;
+
+        if (
+            enemies.length > 0 &&
+            this.enemyShootCooldown <= 0
+        ) {
+            this.shootEnemy();
+
+            const {
+                minShootInterval,
+                maxShootInterval,
+            } = ENEMY_PROJECTILE_CONFIG;
+
+            this.enemyShootCooldown =
+                minShootInterval +
+                Math.random() * (maxShootInterval - minShootInterval);
+        }
+
+        // Enemy projectile movement
+        const enemyProjectiles = this.data.enemyProjectiles;
+
+        for (let i = enemyProjectiles.length - 1; i >= 0; i--) {
+            const projectile = enemyProjectiles[i];
+
+            projectile.y += projectile.speed * deltaTime;
+
+            if (projectile.y > GAME_HEIGHT) {
+                enemyProjectiles.splice(i, 1);
+            }
         }
 
         // Projectile movement
@@ -117,6 +150,29 @@ export class GameEngine {
             }
         }
         this.checkCollisions()
+    }
+
+    private shootEnemy() {
+        const enemies = this.data.enemies;
+
+        if (enemies.length === 0) {
+            return;
+        }
+
+        // Velg en tilfeldig fiende
+        const enemy = enemies[
+            Math.floor(Math.random() * enemies.length)
+            ];
+
+        const projectile: EnemyProjectile = {
+            x: enemy.x + enemy.width / 2 - ENEMY_PROJECTILE_CONFIG.width / 2,
+            y: enemy.y + enemy.height,
+            width: ENEMY_PROJECTILE_CONFIG.width,
+            height: ENEMY_PROJECTILE_CONFIG.height,
+            speed: ENEMY_PROJECTILE_CONFIG.speed,
+        };
+
+        this.data.enemyProjectiles.push(projectile);
     }
 
     private damagePlayer() {
