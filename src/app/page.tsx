@@ -48,11 +48,11 @@ export default function Home() {
                             Notater, ideer og lærdommer — uten krav om at alt skal være production-ready.
                         </span>
                     </Link>
-                    <Link href="/memory-game" className={styles.projectCard}>
+                    <Link href="/games" className={styles.projectCard}>
                         <span className={styles.projectNumber}>02 / LEK</span>
-                        <span className={styles.projectTitle}>Emoji-Memory: Et teit lite tidsfordriv</span>
+                        <span className={styles.projectTitle}>Spill: Små tidsfordriv</span>
                         <span className={styles.projectDescription}>
-                            Enkel implementasjon av Memory. Laget for å lære meg React, emojier fordi jeg ikke kan tegne.
+                            Test hukommelsen med Emoji-Memory, eller forsvar deg mot bugs i Bug Invaders.
                         </span>
                     </Link>
                     <Link href="/recipes" className={styles.projectCard}>

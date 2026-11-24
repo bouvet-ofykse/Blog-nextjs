@@ -13,7 +13,7 @@ const navItems = [
     { name: 'Blogg', path: '/blog' },
     { name: 'Mat', path: '/recipes' },
     { name: 'Bildeanalyse', path: '/image-analysis' },
-    { name: 'Emoji-Memory', path: '/memory-game' },
+    { name: 'Spill', path: '/games' },
     { name: 'Twitch Drops', path: '/twitch-drops' },
 ];
 
@@ -63,16 +63,22 @@ export default function Navbar() {
                 </Link>
 
                 <nav id="primary-navigation" className={`${styles.nav} ${menuOpen ? styles.navOpen : ''}`}>
-                    {navItems.map((item) => (
-                        <Link
-                            key={item.path}
-                            href={item.path}
-                            className={`${styles.link} ${pathname === item.path || (item.path !== '/' && pathname.startsWith(`${item.path}/`)) ? styles.active : ''}`}
-                            onClick={() => setMenuOpen(false)}
-                        >
-                            {item.name}
-                        </Link>
-                    ))}
+                    {navItems.map((item) => {
+                        const isActive = pathname === item.path
+                            || (item.path !== '/' && pathname.startsWith(`${item.path}/`))
+                            || (item.path === '/games' && (pathname === '/memory-game' || pathname.startsWith('/memory-game/')));
+
+                        return (
+                            <Link
+                                key={item.path}
+                                href={item.path}
+                                className={`${styles.link} ${isActive ? styles.active : ''}`}
+                                onClick={() => setMenuOpen(false)}
+                            >
+                                {item.name}
+                            </Link>
+                        );
+                    })}
                 </nav>
 
                 <div className={styles.controls}>
