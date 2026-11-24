@@ -35,3 +35,15 @@
     background: var(--surface);
     box-shadow: var(--shadow);
 }
+
+
+.backLink {
+    display: inline-block;
+    color: var(--muted);
+    font-size: 0.9rem;
+    transition: color 160ms ease;
+}
+
+.backLink:hover {
+    color: var(--accent);
+}

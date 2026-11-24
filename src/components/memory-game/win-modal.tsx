@@ -7,10 +7,10 @@ export default function WinModal({ show, matches, turns, onRestart }: { show: bo
     return (
         <div className={styles.backdrop}>
             <div className={styles.modal}>
-                <h2 className={styles.title}>You won 🎉</h2>
-                <p className={styles.score}>Matches: <strong>{matches}</strong></p>
-                <p className={styles.score}>Turns: <strong>{turns}</strong></p>
-                <button className={styles.button} onClick={onRestart}>Play Again</button>
+                <h2 className={styles.title}>Du vant! 🎉</h2>
+                <p className={styles.score}>Par: <strong>{matches}</strong></p>
+                <p className={styles.score}>Trekk: <strong>{turns}</strong></p>
+                <button type="button" className={styles.button} onClick={onRestart}>Spill igjen</button>
             </div>
         </div>
     );

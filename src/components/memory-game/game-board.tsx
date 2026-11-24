@@ -110,25 +110,46 @@ export default function GameBoard() {
     }
 
     return (
-        <div>
-            <section className={styles.scoreboard}>
-                <p className={styles.stats}>Turns: {turns}</p>
-                <p className={styles.stats}>Matches: {matches}</p>
-                <p className={styles.stats}>Highscore: {highscore}</p>
-                <button className={styles.button} onClick={handleNewGameClick}>Restart</button>
-            </section>
-            <div className={styles['game-board']}>
-                {cards.map((card) => (
-                    <SingleCard
-                        key={card.id}
-                        card={card}
-                        handleChoice={handleChoice}
-                        cardFlipped={card === choiceOne || card === choiceTwo || card.matched}
-                        disabled={disabled}
-                    />))}
+        <section className={styles.gameContainer} aria-label="Emoji-Memory">
+            <div className={styles.gameHeader}>
+                <span>
+                    <span className={styles.statusDot} aria-hidden="true" />
+                    SPILL / EMOJI-MEMORY
+                </span>
+            </div>
+            <div className={styles.gameFrame}>
+                <section className={styles.scoreboard} aria-label="Spillstatistikk">
+                    <div className={styles.stats}>
+                        <span className={styles.label}>Trekk</span>
+                        <span className={styles.value}>{turns}</span>
+                    </div>
+                    <div className={styles.stats}>
+                        <span className={styles.label}>Par</span>
+                        <span className={styles.value}>{matches} / {CARDS.length / 2}</span>
+                    </div>
+                    <div className={styles.stats}>
+                        <span className={styles.label}>Rekord</span>
+                        <span className={styles.value}>{highscore || '–'}</span>
+                    </div>
+                    <button type="button" className={styles.button} onClick={handleNewGameClick}>Start på nytt</button>
+                </section>
+                <div className={styles['game-board']}>
+                    {cards.map((card) => (
+                        <SingleCard
+                            key={card.id}
+                            card={card}
+                            handleChoice={handleChoice}
+                            cardFlipped={card === choiceOne || card === choiceTwo || card.matched}
+                            disabled={disabled}
+                        />))}
+                </div>
+            </div>
+            <div className={styles.gameFooter}>
+                <span>PAR: {matches} / {CARDS.length / 2}</span>
+                <span>STATUS: {gameWon ? "FULLFØRT" : cards.length === 0 ? "LASTER" : "SPILLER"}</span>
             </div>
             {gameWon && <WinModal show={gameWon} matches={matches} turns={turns} onRestart={handleNewGameClick} />}
-        </div>
+        </section>
     );
 }
 

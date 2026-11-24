@@ -1,5 +1,6 @@
 ﻿import Game from "@/components/games/bug-invaders/game";
 import styles from "./page.module.css";
+import Link from 'next/link';
 
 export const metadata = {
     title: "Bug Invaders | ofykse.no",
@@ -9,6 +10,7 @@ export const metadata = {
 export default function BugInvadersPage() {
     return (
         <main className={styles.page}>
+            <Link href="/games" className={styles.backLink}>← Spill</Link>
             <header className={styles.header}>
                 <p className={styles.eyebrow}>Spill / Arcade</p>
                 <h1>Bug Invaders</h1>
