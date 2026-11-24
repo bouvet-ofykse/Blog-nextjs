@@ -17,6 +17,8 @@ export const PLAYER_CONFIG = {
     speed: 360,
     bottomOffset: 45,
     startingLives: 3,
+    invulnerabilityDuration: 1.5,
+    blinkInterval: 0.1,
 };
 
 export const ENEMY_CONFIG = {

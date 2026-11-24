@@ -1,7 +1,7 @@
 ﻿import {
     GAME_WIDTH,
     GAME_HEIGHT,
-    COLORS,
+    COLORS, PLAYER_CONFIG,
 } from "./constants";
 
 import type { GameData } from "./types";
@@ -62,6 +62,19 @@ function drawPlayer(
 ) {
     const { x, y, width, height } = game.player;
 
+    // Blink while invulnerable
+    if (game.invulnerabilityTimer > 0) {
+        const blinkInterval = PLAYER_CONFIG.blinkInterval;
+
+        const blinkPhase = Math.floor(
+            game.invulnerabilityTimer / blinkInterval
+        );
+
+        if (blinkPhase % 2 === 0) {
+            return;
+        }
+    }
+
     ctx.save();
 
     ctx.shadowColor = COLORS.player;
@@ -78,7 +91,6 @@ function drawPlayer(
 
     ctx.restore();
 }
-
 function drawEnemies(
     ctx: CanvasRenderingContext2D,
     game: GameData

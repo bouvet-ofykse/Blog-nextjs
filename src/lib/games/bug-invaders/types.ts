@@ -39,4 +39,5 @@ export interface GameData {
     score: number;
     lives: number;
     state: GameState;
+    invulnerabilityTimer: number;
 }

@@ -4,7 +4,7 @@
     PLAYER_CONFIG,
     ENEMY_CONFIG, ENEMY_PROJECTILE_CONFIG
 } from "./constants";
-import { checkProjectileEnemyCollision } from "./collision";
+import {checkPlayerCollision, checkProjectileEnemyCollision} from "./collision";
 
 import type {GameData, Enemy, Projectile, EnemyProjectile} from "./types";
 import { Input } from "./input";
@@ -16,6 +16,7 @@ export function createGame(): GameData {
         width: PLAYER_CONFIG.width,
         height: PLAYER_CONFIG.height,
         speed: PLAYER_CONFIG.speed,
+        invulnerabilityTimer: 0,
     };
 
     const enemies: Enemy[] = [];
@@ -49,6 +50,7 @@ export function createGame(): GameData {
         lives: PLAYER_CONFIG.startingLives,
         score: 0,
         state: "playing",
+        invulnerabilityTimer: 0,
     };
 }
 
@@ -66,6 +68,19 @@ export class GameEngine {
     }
 
     update(deltaTime: number) {
+
+        if (this.data.state !== "playing") {
+            return;
+        }
+
+        // Update player invulnerability
+        if (this.data.invulnerabilityTimer > 0) {
+            this.data.invulnerabilityTimer = Math.max(
+                0,
+                this.data.invulnerabilityTimer - deltaTime
+            );
+        }
+
         const { player, projectiles, enemies } = this.data;
 
         // Player movement
@@ -149,7 +164,8 @@ export class GameEngine {
                 enemy.y += 15;
             }
         }
-        this.checkCollisions()
+        this.checkCollisions();
+        this.checkPlayerCollisions();
     }
 
     private shootEnemy() {
@@ -175,8 +191,29 @@ export class GameEngine {
         this.data.enemyProjectiles.push(projectile);
     }
 
+    isPlayerInvulnerable(): boolean {
+        return this.data.invulnerabilityTimer > 0;
+    }
+
+    private checkPlayerCollisions() {
+        const result = checkPlayerCollision(
+            this.data.player,
+            this.data.enemyProjectiles
+        );
+
+        this.data.enemyProjectiles = result.remainingProjectiles;
+
+        if (result.hit) {
+            this.damagePlayer();
+        }
+    }
+
     private damagePlayer() {
         if (this.data.state !== "playing") {
+            return;
+        }
+
+        if (this.data.invulnerabilityTimer > 0) {
             return;
         }
 
@@ -185,7 +222,11 @@ export class GameEngine {
         if (this.data.lives <= 0) {
             this.data.lives = 0;
             this.data.state = "gameover";
+            return;
         }
+
+        this.data.invulnerabilityTimer =
+            PLAYER_CONFIG.invulnerabilityDuration;
     }
 
     private shoot() {

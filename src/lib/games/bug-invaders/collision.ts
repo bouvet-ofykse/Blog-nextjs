@@ -1,4 +1,4 @@
-﻿import type { Enemy, Projectile } from "./types";
+﻿import type {Enemy, EnemyProjectile, Player, Projectile} from "./types";
 
 export function intersects(
     a: {
@@ -54,5 +54,33 @@ export function checkProjectileEnemyCollision(
         remainingProjectiles,
         remainingEnemies,
         score,
+    };
+}
+
+
+export function checkPlayerCollision(
+    player: Player,
+    enemyProjectiles: EnemyProjectile[]
+): {
+    remainingProjectiles: EnemyProjectile[];
+    hit: boolean;
+} {
+    const remainingProjectiles = [...enemyProjectiles];
+
+    let hit = false;
+
+    for (let i = remainingProjectiles.length - 1; i >= 0; i--) {
+        const projectile = remainingProjectiles[i];
+
+        if (intersects(player, projectile)) {
+            remainingProjectiles.splice(i, 1);
+            hit = true;
+            break;
+        }
+    }
+
+    return {
+        remainingProjectiles,
+        hit,
     };
 }
