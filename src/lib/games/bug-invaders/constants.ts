@@ -16,6 +16,7 @@ export const PLAYER_CONFIG = {
     height: 30,
     speed: 360,
     bottomOffset: 45,
+    startingLives: 3,
 };
 
 export const ENEMY_CONFIG = {

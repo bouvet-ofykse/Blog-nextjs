@@ -16,6 +16,7 @@ export function createGame(): GameData {
         width: PLAYER_CONFIG.width,
         height: PLAYER_CONFIG.height,
         speed: PLAYER_CONFIG.speed,
+        lives: PLAYER_CONFIG.startingLives
     };
 
     const enemies: Enemy[] = [];
@@ -45,6 +46,7 @@ export function createGame(): GameData {
         player,
         enemies,
         projectiles: [],
+        lives: PLAYER_CONFIG.startingLives,
         score: 0,
         state: "playing",
     };
@@ -115,6 +117,19 @@ export class GameEngine {
             }
         }
         this.checkCollisions()
+    }
+
+    private damagePlayer() {
+        if (this.data.state !== "playing") {
+            return;
+        }
+
+        this.data.lives -= 1;
+
+        if (this.data.lives <= 0) {
+            this.data.lives = 0;
+            this.data.state = "gameover";
+        }
     }
 
     private shoot() {

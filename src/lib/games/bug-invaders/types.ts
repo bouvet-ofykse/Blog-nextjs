@@ -1,4 +1,4 @@
-﻿export type GameState = "menu" | "playing" | "paused";
+﻿export type GameState = "menu" | "playing" | "paused" | "gameover";
 
 export interface Player {
     x: number;
@@ -28,5 +28,6 @@ export interface GameData {
     enemies: Enemy[];
     projectiles: Projectile[];
     score: number;
+    lives: number;
     state: GameState;
 }

@@ -136,7 +136,11 @@ function drawHUD(
     ctx.font = "bold 15px monospace";
 
     ctx.textAlign = "left";
-    ctx.fillText("BUG INVADERS", 24, 32);
+    ctx.fillStyle = COLORS.text;
+    ctx.font = "16px monospace";
+
+    ctx.fillText(`LIVES: ${game.lives}`, 20, 30);
+
 
     ctx.textAlign = "center";
     ctx.fillStyle = COLORS.player;
