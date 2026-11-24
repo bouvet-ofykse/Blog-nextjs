@@ -1,5 +1,7 @@
 ﻿"use client";
 
+import { useEffect, useState } from "react";
+
 interface GameOverlayProps {
     state: "menu" | "playing" | "paused";
     onStart: () => void;
@@ -11,6 +13,12 @@ export default function GameOverlay({
                                         onStart,
                                         onResume,
                                     }: GameOverlayProps) {
+    const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+    useEffect(() => {
+        setIsTouchDevice(navigator.maxTouchPoints > 0 || "ontouchstart" in window);
+    }, []);
+
     if (state === "playing") return null;
 
     return (
@@ -38,16 +46,21 @@ export default function GameOverlay({
                 </button>
 
                 {state === "menu" && (
-                    // <div className="gameInstructions">
-                    //     <span>← → / A D</span>
-                    //     <span>MOVE</span>
-                    //     <span>SPACE</span>
-                    //     <span>SHOOT</span>
-                    // </div>
                     <div className="gameInstructions">
-                        <span>DRAG</span>
-                        <span>TO MOVE</span>
-                        <span>AUTO FIRE</span>
+                        {isTouchDevice ? (
+                            <>
+                                <span>DRAG</span>
+                                <span>TO MOVE</span>
+                                <span>AUTO FIRE</span>
+                            </>
+                        ) : (
+                            <>
+                                <span>← → / A D</span>
+                                <span>MOVE</span>
+                                <span>SPACE</span>
+                                <span>SHOOT</span>
+                            </>
+                        )}
                     </div>
                 )}
             </div>
