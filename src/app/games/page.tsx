@@ -8,18 +8,18 @@ export const metadata = {
 
 const games = [
     {
-        title: "Emoji-Memory",
-        description: "Finn parene og test hukommelsen i et lite spill med emojier.",
-        href: "/memory-game",
-        label: "Hukommelse",
-        artwork: "🃏",
-    },
-    {
         title: "Bug Invaders",
         description: "Forsvar applikasjonen din mot en invasjon av bugs.",
         href: "/games/bug-invaders",
         label: "Arcade",
         artwork: "👾",
+    },
+    {
+        title: "Emoji-Memory",
+        description: "Finn parene og test hukommelsen i et lite spill med emojier.",
+        href: "/memory-game",
+        label: "Hukommelse",
+        artwork: "🃏",
     },
 ];
 
