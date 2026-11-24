@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useState } from "react";
+import {useEffect, useState} from "react";
 
 import GameCanvas from "./game-canvas";
 import GameOverlay from "./game-overlay";
@@ -14,6 +14,28 @@ export default function Game() {
     const startGame = () => setState("playing");
     const pauseGame = () => setState("paused");
     const resumeGame = () => setState("playing");
+
+    useEffect(() => {
+        const handleVisibilityChange = () => {
+            if (document.hidden) {
+                setState((current) =>
+                    current === "playing" ? "paused" : current
+                );
+            }
+        };
+
+        document.addEventListener(
+            "visibilitychange",
+            handleVisibilityChange
+        );
+
+        return () => {
+            document.removeEventListener(
+                "visibilitychange",
+                handleVisibilityChange
+            );
+        };
+    }, []);
 
     return (
         <section className={styles.gameContainer}>

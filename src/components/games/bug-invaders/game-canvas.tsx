@@ -1,4 +1,5 @@
-﻿"use client";
+﻿
+"use client";
 
 import { useEffect, useRef } from "react";
 
@@ -35,6 +36,48 @@ export default function GameCanvas({ active }: GameCanvasProps) {
         let previousTime = 0;
         let running = true;
 
+        const updatePointer = (event: PointerEvent) => {
+            const rect = canvas.getBoundingClientRect();
+
+            const scaleX = GAME_WIDTH / rect.width;
+
+            const x = (event.clientX - rect.left) * scaleX;
+
+            input.setPointerPosition(x);
+        };
+
+        const handlePointerDown = (event: PointerEvent) => {
+            if (!activeRef.current) return;
+
+            event.preventDefault();
+            canvas.setPointerCapture(event.pointerId);
+            updatePointer(event);
+        };
+
+        const handlePointerMove = (event: PointerEvent) => {
+            if (!activeRef.current) return;
+
+            if (event.buttons === 0 && event.pointerType === "mouse") {
+                return;
+            }
+
+            updatePointer(event);
+        };
+
+        const handlePointerUp = () => {
+            input.setPointerPosition(null);
+        };
+
+        const handlePointerCancel = () => {
+            input.setPointerPosition(null);
+        };
+
+        canvas.addEventListener("pointerdown", handlePointerDown);
+        canvas.addEventListener("pointermove", handlePointerMove);
+        canvas.addEventListener("pointerup", handlePointerUp);
+        canvas.addEventListener("pointercancel", handlePointerCancel);
+        canvas.addEventListener("lostpointercapture", handlePointerCancel);
+
         const loop = (timestamp: number) => {
             if (!running) return;
 
@@ -58,6 +101,13 @@ export default function GameCanvas({ active }: GameCanvasProps) {
         return () => {
             running = false;
             cancelAnimationFrame(animationId);
+
+            canvas.removeEventListener("pointerdown", handlePointerDown);
+            canvas.removeEventListener("pointermove", handlePointerMove);
+            canvas.removeEventListener("pointerup", handlePointerUp);
+            canvas.removeEventListener("pointercancel", handlePointerCancel);
+            canvas.removeEventListener("lostpointercapture", handlePointerCancel);
+
             input.destroy();
             engine.destroy();
         };
@@ -70,6 +120,7 @@ export default function GameCanvas({ active }: GameCanvasProps) {
             height={GAME_HEIGHT}
             className="bugInvadersCanvas"
             aria-label="Bug Invaders game"
+            style={{ touchAction: "none" }}
         />
     );
 }

@@ -38,11 +38,16 @@ export default function GameOverlay({
                 </button>
 
                 {state === "menu" && (
+                    // <div className="gameInstructions">
+                    //     <span>← → / A D</span>
+                    //     <span>MOVE</span>
+                    //     <span>SPACE</span>
+                    //     <span>SHOOT</span>
+                    // </div>
                     <div className="gameInstructions">
-                        <span>← → / A D</span>
-                        <span>MOVE</span>
-                        <span>SPACE</span>
-                        <span>SHOOT</span>
+                        <span>DRAG</span>
+                        <span>TO MOVE</span>
+                        <span>AUTO FIRE</span>
                     </div>
                 )}
             </div>
