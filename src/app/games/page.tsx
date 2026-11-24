@@ -17,7 +17,7 @@ const games = [
     {
         title: "Emoji-Memory",
         description: "Finn parene og test hukommelsen i et lite spill med emojier.",
-        href: "/memory-game",
+        href: "/games/memory-game",
         label: "Hukommelse",
         artwork: "🃏",
     },
