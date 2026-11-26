@@ -2,7 +2,9 @@
     GAME_WIDTH,
     GAME_HEIGHT,
     PLAYER_CONFIG,
-    ENEMY_CONFIG, ENEMY_PROJECTILE_CONFIG
+    ENEMY_CONFIG,
+    ENEMY_PROJECTILE_CONFIG,
+    WAVE_CONFIG
 } from "./constants";
 import {checkPlayerCollision, checkProjectileEnemyCollision} from "./collision";
 
@@ -19,7 +21,6 @@ export function createGame(): GameData {
         invulnerabilityTimer: 0,
     };
 
-    const enemies: Enemy[] = [];
 
     const totalWidth =
         ENEMY_CONFIG.columns * ENEMY_CONFIG.width +
@@ -27,7 +28,41 @@ export function createGame(): GameData {
 
     const startX = (GAME_WIDTH - totalWidth) / 2;
 
-    for (let row = 0; row < ENEMY_CONFIG.rows; row++) {
+
+    const wave = 1;
+    const enemies = createEnemies(wave);
+
+    return {
+        player,
+        enemies,
+        projectiles: [],
+        enemyProjectiles: [],
+        particles: [],
+        lives: PLAYER_CONFIG.startingLives,
+        score: 0,
+        state: "playing",
+        invulnerabilityTimer: 0,
+        wave,
+        waveTransitionTimer: 0,
+    };
+}
+
+function createEnemies(wave: number): Enemy[] {
+    const enemies: Enemy[] = [];
+
+    // Legg til én ekstra rad for hver tredje bølge.
+    const rows = Math.min(
+        ENEMY_CONFIG.rows + Math.floor((wave - 1) / 3),
+        6
+    );
+
+    const totalWidth =
+        ENEMY_CONFIG.columns * ENEMY_CONFIG.width +
+        (ENEMY_CONFIG.columns - 1) * ENEMY_CONFIG.horizontalGap;
+
+    const startX = (GAME_WIDTH - totalWidth) / 2;
+
+    for (let row = 0; row < rows; row++) {
         for (let col = 0; col < ENEMY_CONFIG.columns; col++) {
             enemies.push({
                 x: startX + col * (
@@ -42,24 +77,15 @@ export function createGame(): GameData {
         }
     }
 
-    return {
-        player,
-        enemies,
-        projectiles: [],
-        enemyProjectiles: [],
-        particles: [],
-        lives: PLAYER_CONFIG.startingLives,
-        score: 0,
-        state: "playing",
-        invulnerabilityTimer: 0,
-    };
+    return enemies;
 }
 
 export class GameEngine {
     data: GameData;
     private input: Input;
     private enemyDirection = 1;
-    private enemySpeed = 35;
+    private readonly baseEnemySpeed = 35;
+    private enemySpeed = this.baseEnemySpeed;
     private shootCooldown = 0;
     private enemyShootCooldown = 1.5;
 
@@ -70,11 +96,23 @@ export class GameEngine {
 
     update(deltaTime: number) {
 
+        this.updateParticles(deltaTime);
+
+        // Partikler skal også oppdateres når spillet er over.
+        this.updateParticles(deltaTime);
+
         if (this.data.state !== "playing") {
             return;
         }
 
-        this.updateParticles(deltaTime);
+        // Håndter overgang mellom bølger.
+        if (
+            this.data.enemies.length === 0 ||
+            this.data.waveTransitionTimer > 0
+        ) {
+            this.updateWave(deltaTime);
+            return;
+        }
 
         // Update player invulnerability
         if (this.data.invulnerabilityTimer > 0) {
@@ -366,6 +404,40 @@ export class GameEngine {
             if (particle.life <= 0) {
                 particles.splice(i, 1);
             }
+        }
+    }
+
+    private updateWave(deltaTime: number) {
+        if (this.data.enemies.length > 0) {
+            return;
+        }
+
+        // Start overgangen til neste bølge.
+        if (this.data.waveTransitionTimer <= 0) {
+            this.data.wave += 1;
+            this.data.waveTransitionTimer =
+                WAVE_CONFIG.transitionDuration;
+            return;
+        }
+
+        this.data.waveTransitionTimer -= deltaTime;
+
+        if (this.data.waveTransitionTimer <= 0) {
+            this.data.waveTransitionTimer = 0;
+
+            this.data.enemies = createEnemies(this.data.wave);
+
+            const speedMultiplier = Math.min(
+                1 + (this.data.wave - 1) * WAVE_CONFIG.enemySpeedIncrease,
+                WAVE_CONFIG.maxEnemySpeedMultiplier
+            );
+
+            this.enemySpeed =
+                this.baseEnemySpeed * speedMultiplier;
+
+            // Nullstill retning og skuddtimer for neste bølge.
+            this.enemyDirection = 1;
+            this.enemyShootCooldown = 1.5;
         }
     }
 

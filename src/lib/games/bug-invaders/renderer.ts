@@ -21,6 +21,7 @@ export function renderGame(
     drawEnemyProjectiles(ctx, game);
     drawProjectiles(ctx, game);
     drawParticles(ctx, game);
+    drawWaveTransition(ctx, game);
     drawHUD(ctx, game);
 }
 
@@ -198,6 +199,41 @@ function drawParticles(
     ctx.restore();
 }
 
+function drawWaveTransition(
+    ctx: CanvasRenderingContext2D,
+    game: GameData
+) {
+    if (game.waveTransitionTimer <= 0) {
+        return;
+    }
+
+    ctx.save();
+
+    ctx.fillStyle = "rgba(8, 13, 25, 0.65)";
+    ctx.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    ctx.shadowColor = "#55d9ff";
+    ctx.shadowBlur = 20;
+
+    ctx.fillStyle = "#55d9ff";
+    ctx.font = "bold 42px monospace";
+    ctx.fillText(`WAVE ${game.wave}`, GAME_WIDTH / 2, GAME_HEIGHT / 2);
+
+    ctx.shadowBlur = 0;
+    ctx.fillStyle = COLORS.muted;
+    ctx.font = "16px monospace";
+    ctx.fillText(
+        "GET READY",
+        GAME_WIDTH / 2,
+        GAME_HEIGHT / 2 + 45
+    );
+
+    ctx.restore();
+}
+
 function drawHUD(
     ctx: CanvasRenderingContext2D,
     game: GameData
@@ -222,11 +258,7 @@ function drawHUD(
 
     ctx.textAlign = "right";
     ctx.fillStyle = COLORS.muted;
-    ctx.fillText(
-        `BUGS: ${game.enemies.length}`,
-        GAME_WIDTH - 24,
-        32
-    );
+    ctx.fillText(`WAVE ${game.wave}`, GAME_WIDTH - 20, 30);
 
     ctx.strokeStyle = COLORS.grid;
     ctx.beginPath();

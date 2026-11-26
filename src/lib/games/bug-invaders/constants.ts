@@ -37,3 +37,9 @@ export const ENEMY_PROJECTILE_CONFIG = {
     minShootInterval: 1.0,
     maxShootInterval: 2.0,
 };
+
+export const WAVE_CONFIG = {
+    transitionDuration: 2.5,
+    enemySpeedIncrease: 0.12,
+    maxEnemySpeedMultiplier: 2.5,
+};

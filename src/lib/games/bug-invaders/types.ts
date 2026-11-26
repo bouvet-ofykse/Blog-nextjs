@@ -41,6 +41,8 @@ export interface GameData {
     lives: number;
     state: GameState;
     invulnerabilityTimer: number;
+    wave: number;
+    waveTransitionTimer: number;
 }
 
 export interface Particle {
