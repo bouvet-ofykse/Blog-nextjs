@@ -47,6 +47,7 @@ export function createGame(): GameData {
         enemies,
         projectiles: [],
         enemyProjectiles: [],
+        particles: [],
         lives: PLAYER_CONFIG.startingLives,
         score: 0,
         state: "playing",
@@ -72,6 +73,8 @@ export class GameEngine {
         if (this.data.state !== "playing") {
             return;
         }
+
+        this.updateParticles(deltaTime);
 
         // Update player invulnerability
         if (this.data.invulnerabilityTimer > 0) {
@@ -191,6 +194,39 @@ export class GameEngine {
         this.data.enemyProjectiles.push(projectile);
     }
 
+
+    private createExplosion(
+        x: number,
+        y: number,
+        colors: string[] = [
+            "#ff718d",
+            "#ff9f43",
+            "#ffd166",
+            "#ffffff",
+        ],
+        particleCount = 18
+    ) {
+        for (let i = 0; i < particleCount; i++) {
+            const angle =
+                (Math.PI * 2 * i) / particleCount +
+                (Math.random() - 0.5) * 0.4;
+
+            const speed = 80 + Math.random() * 180;
+            const life = 0.25 + Math.random() * 0.35;
+
+            this.data.particles.push({
+                x,
+                y,
+                velocityX: Math.cos(angle) * speed,
+                velocityY: Math.sin(angle) * speed,
+                size: 2 + Math.random() * 4,
+                life,
+                maxLife: life,
+                color: colors[Math.floor(Math.random() * colors.length)],
+            });
+        }
+    }
+
     isPlayerInvulnerable(): boolean {
         return this.data.invulnerabilityTimer > 0;
     }
@@ -216,6 +252,14 @@ export class GameEngine {
         if (this.data.invulnerabilityTimer > 0) {
             return;
         }
+
+        const player = this.data.player;
+
+        // Create explosion at the center of the player
+        this.createExplosion(
+            player.x + player.width / 2,
+            player.y + player.height / 2
+        );
 
         this.data.lives -= 1;
 
@@ -297,6 +341,32 @@ export class GameEngine {
         this.data.projectiles = result.remainingProjectiles;
         this.data.enemies = result.remainingEnemies;
         this.data.score += result.score;
+
+        for (const enemy of result.hitEnemies) {
+            this.createExplosion(
+                enemy.x + enemy.width / 2,
+                enemy.y + enemy.height / 2,
+                ["#b58aff", "#55d9ff", "#ffffff"],
+                10
+            );
+        }
+    }
+
+    private updateParticles(deltaTime: number) {
+        const particles = this.data.particles;
+
+        for (let i = particles.length - 1; i >= 0; i--) {
+            const particle = particles[i];
+
+            particle.x += particle.velocityX * deltaTime;
+            particle.y += particle.velocityY * deltaTime;
+
+            particle.life -= deltaTime;
+
+            if (particle.life <= 0) {
+                particles.splice(i, 1);
+            }
+        }
     }
 
     destroy() {

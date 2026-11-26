@@ -36,8 +36,20 @@ export interface GameData {
     enemies: Enemy[];
     projectiles: Projectile[];
     enemyProjectiles: EnemyProjectile[];
+    particles: Particle[];
     score: number;
     lives: number;
     state: GameState;
     invulnerabilityTimer: number;
+}
+
+export interface Particle {
+    x: number;
+    y: number;
+    velocityX: number;
+    velocityY: number;
+    size: number;
+    life: number;
+    maxLife: number;
+    color: string;
 }

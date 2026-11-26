@@ -20,6 +20,7 @@ export function renderGame(
     drawEnemies(ctx, game);
     drawEnemyProjectiles(ctx, game);
     drawProjectiles(ctx, game);
+    drawParticles(ctx, game);
     drawHUD(ctx, game);
 }
 
@@ -91,6 +92,7 @@ function drawPlayer(
 
     ctx.restore();
 }
+
 function drawEnemies(
     ctx: CanvasRenderingContext2D,
     game: GameData
@@ -158,6 +160,39 @@ function drawProjectiles(
             projectile.width,
             projectile.height
         );
+    });
+
+    ctx.restore();
+}
+
+function drawParticles(
+    ctx: CanvasRenderingContext2D,
+    game: GameData
+) {
+    ctx.save();
+
+    game.particles.forEach((particle) => {
+        const opacity = Math.max(
+            0,
+            particle.life / particle.maxLife
+        );
+
+        ctx.globalAlpha = opacity;
+        ctx.fillStyle = particle.color;
+
+        ctx.shadowColor = particle.color;
+        ctx.shadowBlur = 10;
+
+        ctx.beginPath();
+        ctx.arc(
+            particle.x,
+            particle.y,
+            particle.size * opacity,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
     });
 
     ctx.restore();
