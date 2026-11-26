@@ -1,7 +1,7 @@
 ﻿import {
     GAME_WIDTH,
     GAME_HEIGHT,
-    COLORS, PLAYER_CONFIG,
+    COLORS, PLAYER_CONFIG, ENEMY_TYPES
 } from "./constants";
 
 import type { GameData } from "./types";
@@ -101,15 +101,19 @@ function drawEnemies(
     game.enemies.forEach((enemy, index) => {
         ctx.save();
 
-        ctx.fillStyle = index % 3 === 0
-            ? "#ff718d"
-            : COLORS.enemy;
+        const color = {
+            basic: index % 3 === 0 ? "#ff718d" : COLORS.enemy,
+            fast: ENEMY_TYPES.fast.color,
+            tank: ENEMY_TYPES.tank.color,
+        }[enemy.type];
 
-        ctx.shadowColor = COLORS.enemy;
-        ctx.shadowBlur = 8;
+        ctx.fillStyle = color;
+        ctx.shadowColor = color;
+        ctx.shadowBlur = enemy.type === "tank" ? 12 : 8;
 
         const { x, y, width, height } = enemy;
 
+        // Original enemy shape
         ctx.fillRect(x + 5, y, width - 10, height);
         ctx.fillRect(x, y + 6, width, height - 12);
 
@@ -117,6 +121,31 @@ function drawEnemies(
         ctx.fillStyle = COLORS.background;
         ctx.fillRect(x + 9, y + 8, 5, 5);
         ctx.fillRect(x + width - 14, y + 8, 5, 5);
+
+        // Tank health indicator
+        if (enemy.type === "tank") {
+            ctx.shadowBlur = 0;
+
+            const healthPercentage =
+                enemy.health / enemy.maxHealth;
+
+            ctx.fillStyle = "#333344";
+            ctx.fillRect(x, y - 6, width, 3);
+
+            if (healthPercentage > 0.7) {
+                ctx.fillStyle = "#38e8a5";
+            } else if (healthPercentage > 0.5) {
+                ctx.fillStyle = "#c79724";
+            } else {
+                ctx.fillStyle = "#ff718d";
+            }
+            ctx.fillRect(
+                x,
+                y - 6,
+                width * healthPercentage,
+                3
+            );
+        }
 
         ctx.restore();
     });

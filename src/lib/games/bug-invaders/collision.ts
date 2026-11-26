@@ -32,7 +32,7 @@ export function checkProjectileEnemyCollision(
     score: number;
 } {
     const remainingProjectiles = [...projectiles];
-    const remainingEnemies = [...enemies];
+    const remainingEnemies = enemies.map((enemy) => ({ ...enemy }));
     const hitEnemies: Enemy[] = [];
     let score = 0;
 
@@ -46,10 +46,15 @@ export function checkProjectileEnemyCollision(
         if (enemyIndex !== -1) {
             remainingProjectiles.splice(p, 1);
 
-            const [hitEnemy] = remainingEnemies.splice(enemyIndex, 1);
-            hitEnemies.push(hitEnemy);
+            const enemy = remainingEnemies[enemyIndex];
+            enemy.health -= 1;
 
-            score += 10;
+            hitEnemies.push({ ...enemy });
+
+            if (enemy.health <= 0) {
+                score += enemy.scoreValue;
+                remainingEnemies.splice(enemyIndex, 1);
+            }
         }
     }
 

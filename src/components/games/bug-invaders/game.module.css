@@ -69,7 +69,10 @@
     aspect-ratio: 4 / 3;
 }
 
-.gameContainer :global(.gameOverlay) {
+
+/* Overlay */
+
+.gameOverlay {
     position: absolute;
     inset: 0;
     display: flex;
@@ -79,33 +82,38 @@
     backdrop-filter: blur(4px);
 }
 
-.gameContainer :global(.gameOverlayContent) {
+.gameOverlayContent {
     width: 90%;
     text-align: center;
 }
 
-.gameContainer :global(.gameEyebrow) {
+.gameEyebrow {
     margin-bottom: 16px;
     color: #38e8a5;
     font-size: 11px;
     letter-spacing: 3px;
 }
 
-.gameContainer :global(.gameOverlayContent h1) {
+.gameTitle {
     margin: 0;
     color: #e8f0ff;
     font-size: clamp(26px, 5vw, 48px);
     letter-spacing: 3px;
 }
 
-.gameContainer :global(.gameOverlayContent p) {
+.gameDescription {
     margin: 18px 0 28px;
     color: #8291aa;
     font-size: 14px;
 }
 
-.gameContainer :global(.gameButton) {
+/* Buttons */
+
+.gameButton {
+    width: 220px;
+    min-height: 52px;
     padding: 14px 30px;
+    box-sizing: border-box;
     border: 1px solid #38e8a5;
     border-radius: 4px;
     background: #38e8a5;
@@ -117,13 +125,48 @@
     transition: 150ms ease;
 }
 
-.gameContainer :global(.gameButton:hover) {
+.gameButton:hover {
     background: transparent;
     color: #38e8a5;
     box-shadow: 0 0 20px rgb(56 232 165 / 20%);
 }
 
-.gameContainer :global(.gameInstructions) {
+.gameActions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.secondaryButton {
+    width: 220px;
+    min-height: 52px;
+    padding: 13px 20px;
+    box-sizing: border-box;
+    background: rgba(85, 217, 255, 0.04);
+    border: 1px solid #35445e;
+    border-radius: 6px;
+    color: #8291aa;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    transition: all 0.2s ease;
+}
+
+.secondaryButton:hover {
+    background: rgba(85, 217, 255, 0.1);
+    border-color: #55d9ff;
+    color: #55d9ff;
+    box-shadow: 0 0 12px rgba(85, 217, 255, 0.12);
+}
+
+/* Instructions */
+
+.gameInstructions {
     display: flex;
     justify-content: center;
     gap: 12px;
@@ -132,7 +175,7 @@
     font-size: 10px;
 }
 
-.gameContainer :global(.gameInstructions span:nth-child(odd)) {
+.gameInstructions span:nth-child(odd) {
     color: #38e8a5;
 }
 
@@ -143,8 +186,218 @@
         padding: 10px;
     }
 
-    .gameContainer :global(.gameInstructions) {
+    .gameInstructions {
         gap: 6px;
         font-size: 8px;
     }
+
+    .gameActions {
+        margin-top: 28px;
+    }
+}
+
+.gameResults {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    width: 100%;
+    margin: 24px 0 16px;
+}
+
+.gameResult {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 18px 12px;
+    background: rgba(24, 36, 58, 0.8);
+    border: 1px solid #263650;
+    border-radius: 8px;
+}
+
+.gameResult span {
+    color: #8291aa;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+}
+
+.gameResult strong {
+    color: #55d9ff;
+    font-family: monospace;
+    font-size: clamp(22px, 5vw, 32px);
+}
+
+.gameResult:last-child strong {
+    color: #38e8a5;
+}
+
+/* New high score celebration */
+
+.newHighScoreBanner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+
+    width: 100%;
+    box-sizing: border-box;
+    margin: 20px auto 24px;
+    padding: 22px 16px;
+    min-height: 90px;
+
+    background: linear-gradient(
+            135deg,
+            rgba(56, 232, 165, 0.16),
+            rgba(255, 215, 100, 0.08)
+    );
+
+    border: 1px solid rgba(56, 232, 165, 0.7);
+    border-radius: 8px;
+
+    box-shadow:
+            0 0 15px rgba(56, 232, 165, 0.15),
+            inset 0 0 15px rgba(56, 232, 165, 0.05);
+
+    animation: celebrationAppear 0.6s ease-out,
+    celebrationGlow 2s ease-in-out infinite;
+}
+
+.celebrationText {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-align: center;
+}
+
+.celebrationText strong {
+    color: #38e8a5;
+    font-size: clamp(18px, 3vw, 24px);
+    font-weight: 900;
+    letter-spacing: 2.5px;
+    text-shadow: 0 0 16px rgba(56, 232, 165, 0.7);
+}
+
+.celebrationText span {
+    color: #d1dfed;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+}
+
+.celebrationStar {
+    color: #fbd66b;
+    font-size: 32px;
+    text-shadow: 0 0 14px rgba(251, 214, 107, 0.8);
+    animation: starTwinkle 1.2s ease-in-out infinite alternate;
+}
+
+.celebrationStar:last-child {
+    animation-delay: 0.6s;
+}
+
+@keyframes celebrationAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.7) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes celebrationGlow {
+    0%, 100% {
+        box-shadow:
+                0 0 15px rgba(56, 232, 165, 0.15),
+                inset 0 0 15px rgba(56, 232, 165, 0.05);
+    }
+
+    50% {
+        box-shadow:
+                0 0 28px rgba(56, 232, 165, 0.35),
+                inset 0 0 20px rgba(56, 232, 165, 0.1);
+    }
+}
+
+@keyframes starTwinkle {
+    from {
+        opacity: 0.4;
+        transform: scale(0.8) rotate(-15deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.2) rotate(15deg);
+    }
+}
+
+.gameWaveResult {
+    color: #8291aa;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    margin-bottom: 20px;
+}
+.gameActions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.gameActions :global(.gameButton),
+.secondaryButton {
+    width: 220px;
+    min-height: 52px;
+    box-sizing: border-box;
+}
+
+.secondaryButton {
+    padding: 13px 20px;
+    background: rgba(85, 217, 255, 0.04);
+    border: 1px solid #35445e;
+    border-radius: 6px;
+
+    color: #8291aa;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+
+    transition: all 0.2s ease;
+}
+
+.secondaryButton:hover {
+    background: rgba(85, 217, 255, 0.1);
+    border-color: #55d9ff;
+    color: #55d9ff;
+    box-shadow: 0 0 12px rgba(85, 217, 255, 0.12);
+}
+
+.highScore {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+    margin-right: 20px;
+    color: #8291aa;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+}
+
+.highScore strong {
+    color: #38e8a5;
+    font-family: monospace;
+    font-size: 15px;
+}
+.recordResult {
+    border-color: rgba(56, 232, 165, 0.7);
+    box-shadow: 0 0 18px rgba(56, 232, 165, 0.15);
+}
+
+.recordResult strong {
+    text-shadow: 0 0 14px rgba(56, 232, 165, 0.5);
 }

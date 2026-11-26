@@ -4,11 +4,11 @@
     PLAYER_CONFIG,
     ENEMY_CONFIG,
     ENEMY_PROJECTILE_CONFIG,
-    WAVE_CONFIG
+    WAVE_CONFIG, ENEMY_TYPES
 } from "./constants";
 import {checkPlayerCollision, checkProjectileEnemyCollision} from "./collision";
 
-import type {GameData, Enemy, Projectile, EnemyProjectile} from "./types";
+import type {GameData, Enemy, Projectile, EnemyProjectile, EnemyType} from "./types";
 import { Input } from "./input";
 
 export function createGame(): GameData {
@@ -50,29 +50,62 @@ export function createGame(): GameData {
 function createEnemies(wave: number): Enemy[] {
     const enemies: Enemy[] = [];
 
-    // Legg til én ekstra rad for hver tredje bølge.
-    const rows = Math.min(
-        ENEMY_CONFIG.rows + Math.floor((wave - 1) / 3),
-        6
-    );
+    const waveTypes: EnemyType[] = [
+        "tank",
+        "basic",
+        "fast",
+        "basic",
+        "tank",
+        "fast",
+        "tank",
+    ];
+
+    // Gjenta mønsteret etter wave 6.
+    const type = waveTypes[(wave - 1) % waveTypes.length];
+
+    const isTank = type === "tank";
+
+    // Tank har færre fiender og større avstand mellom dem.
+    const columns = isTank ? 5 : ENEMY_CONFIG.columns;
+
+    const rows = isTank
+        ? 2 + Math.floor((wave - 4) / 6)
+        : Math.min(
+            ENEMY_CONFIG.rows + Math.floor((wave - 1) / 3),
+            6
+        );
+
+    const width = isTank
+        ? ENEMY_CONFIG.width * 1.5
+        : ENEMY_CONFIG.width;
+
+    const height = isTank
+        ? ENEMY_CONFIG.height * 1.5
+        : ENEMY_CONFIG.height;
+
+    const horizontalGap = isTank
+        ? ENEMY_CONFIG.horizontalGap + 12
+        : ENEMY_CONFIG.horizontalGap;
 
     const totalWidth =
-        ENEMY_CONFIG.columns * ENEMY_CONFIG.width +
-        (ENEMY_CONFIG.columns - 1) * ENEMY_CONFIG.horizontalGap;
+        columns * width + (columns - 1) * horizontalGap;
 
     const startX = (GAME_WIDTH - totalWidth) / 2;
 
+    const config = ENEMY_TYPES[type];
+
     for (let row = 0; row < rows; row++) {
-        for (let col = 0; col < ENEMY_CONFIG.columns; col++) {
+        for (let col = 0; col < columns; col++) {
             enemies.push({
-                x: startX + col * (
-                    ENEMY_CONFIG.width + ENEMY_CONFIG.horizontalGap
-                ),
-                y: 100 + row * (
-                    ENEMY_CONFIG.height + ENEMY_CONFIG.verticalGap
-                ),
-                width: ENEMY_CONFIG.width,
-                height: ENEMY_CONFIG.height,
+                x: startX + col * (width + horizontalGap),
+                y: 100 + row * (height + ENEMY_CONFIG.verticalGap),
+                width,
+                height,
+                type,
+                health: config.health,
+                maxHealth: config.health,
+                scoreValue: config.scoreValue,
+                speedMultiplier: config.speedMultiplier,
             });
         }
     }
@@ -188,13 +221,19 @@ export class GameEngine {
         let shouldMoveDown = false;
 
         for (const enemy of enemies) {
-            enemy.x += this.enemyDirection * this.enemySpeed * deltaTime;
+            const nextX =
+                enemy.x +
+                this.enemyDirection *
+                this.enemySpeed *
+                enemy.speedMultiplier *
+                deltaTime;
 
             if (
-                enemy.x <= 10 ||
-                enemy.x + enemy.width >= GAME_WIDTH - 10
+                nextX < 10 ||
+                nextX + enemy.width > GAME_WIDTH - 10
             ) {
                 shouldMoveDown = true;
+                break;
             }
         }
 
@@ -205,6 +244,29 @@ export class GameEngine {
                 enemy.y += 15;
             }
         }
+
+// Move enemies after checking boundaries
+        for (const enemy of enemies) {
+            enemy.x +=
+                this.enemyDirection *
+                this.enemySpeed *
+                enemy.speedMultiplier *
+                deltaTime;
+
+            // Safety clamp to keep enemies inside the canvas.
+            enemy.x = Math.max(
+                10,
+                Math.min(GAME_WIDTH - 10 - enemy.width, enemy.x)
+            );
+        }
+
+        // if (shouldMoveDown) {
+        //     this.enemyDirection *= -1;
+        //
+        //     for (const enemy of enemies) {
+        //         enemy.y += 15;
+        //     }
+        // }
         this.checkCollisions();
         this.checkPlayerCollisions();
     }
@@ -381,11 +443,17 @@ export class GameEngine {
         this.data.score += result.score;
 
         for (const enemy of result.hitEnemies) {
+            const colors = {
+                basic: ["#b58aff", "#ffffff"],
+                fast: ["#55d9ff", "#ffffff"],
+                tank: ["#ff718d", "#ff9f43", "#ffffff"],
+            };
+
             this.createExplosion(
                 enemy.x + enemy.width / 2,
                 enemy.y + enemy.height / 2,
-                ["#b58aff", "#55d9ff", "#ffffff"],
-                10
+                colors[enemy.type],
+                enemy.type === "tank" ? 14 : 10
             );
         }
     }

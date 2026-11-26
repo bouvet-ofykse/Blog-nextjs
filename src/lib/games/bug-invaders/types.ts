@@ -1,4 +1,5 @@
 ﻿export type GameState = "menu" | "playing" | "paused" | "gameover";
+export type EnemyType = "basic" | "fast" | "tank";
 
 export interface Player {
     x: number;
@@ -13,6 +14,11 @@ export interface Enemy {
     y: number;
     width: number;
     height: number;
+    type: EnemyType;
+    health: number;
+    maxHealth: number;
+    scoreValue: number;
+    speedMultiplier: number;
 }
 
 export interface Projectile {

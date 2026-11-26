@@ -14,13 +14,18 @@ import { renderGame } from "@/lib/games/bug-invaders/renderer";
 
 interface GameCanvasProps {
     active: boolean;
+    onGameOver: (score: number, wave: number) => void;
 }
 
-export default function GameCanvas({ active }: GameCanvasProps) {
+export default function GameCanvas({ active, onGameOver }: GameCanvasProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const activeRef = useRef(active);
+    const gameOverReported = useRef(false);
+    const onGameOverRef = useRef(onGameOver);
 
     activeRef.current = active;
+    onGameOverRef.current = onGameOver;
+
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -89,6 +94,18 @@ export default function GameCanvas({ active }: GameCanvasProps) {
 
             if (activeRef.current) {
                 engine.update(deltaTime);
+            }
+
+            if (
+                engine.data.state === "gameover" &&
+                !gameOverReported.current
+            ) {
+                gameOverReported.current = true;
+
+                onGameOverRef.current(
+                    engine.data.score,
+                    engine.data.wave
+                );
             }
 
             renderGame(ctx, engine.data);

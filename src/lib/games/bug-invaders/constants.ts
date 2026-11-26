@@ -43,3 +43,24 @@ export const WAVE_CONFIG = {
     enemySpeedIncrease: 0.12,
     maxEnemySpeedMultiplier: 2.5,
 };
+
+export const ENEMY_TYPES = {
+    basic: {
+        health: 1,
+        scoreValue: 10,
+        speedMultiplier: 1,
+        color: "#b58aff",
+    },
+    fast: {
+        health: 1,
+        scoreValue: 20,
+        speedMultiplier: 1.8,
+        color: "#55d9ff",
+    },
+    tank: {
+        health: 3,
+        scoreValue: 50,
+        speedMultiplier: 0.7,
+        color: "#6acc48",
+    },
+};
