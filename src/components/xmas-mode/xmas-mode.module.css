@@ -120,6 +120,18 @@
     }
 }
 
+@media (max-width: 700px) {
+    .light:nth-child(n + 13) {
+        display: none;
+    }
+}
+
+@media (max-width: 1200px) {
+    .light:nth-child(n + 20) {
+        display: none;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     .light {
         animation: none;

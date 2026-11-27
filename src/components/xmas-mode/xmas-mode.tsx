@@ -11,7 +11,7 @@ const snowflakes = Array.from({ length: 28 }, (_, index) => ({
 }));
 
 export function isChristmasMode(date: Date) {
-    return date.getMonth() === 10;
+    return date.getMonth() === 11;
 }
 
 export default function XmasMode() {
