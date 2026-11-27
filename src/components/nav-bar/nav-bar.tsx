@@ -7,6 +7,7 @@ import styles from './nav-bar.module.css';
 import 'boxicons/css/boxicons.min.css';
 import Image from "next/image";
 import profilepic from '@/content/profile.png';
+import XmasMode from '@/components/xmas-mode/xmas-mode';
 
 const navItems = [
     { name: 'Hjem', path: '/' },
@@ -115,6 +116,7 @@ export default function Navbar() {
                     </button>
                 </div>
             </div>
+            <XmasMode />
         </header>
     );
 }

@@ -1,0 +1,131 @@
+.christmasLights {
+    position: absolute;
+    z-index: 11;
+    top: 100%;
+    right: 0;
+    left: 0;
+    display: flex;
+    height: 14px;
+    justify-content: space-between;
+    padding: 0 3%;
+    pointer-events: none;
+}
+
+.logoWrapper {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.greeting:not(:empty) {
+    position: absolute;
+    z-index: 12;
+    top: calc(100% + 1rem);
+    left: 0;
+    padding: 0.4rem 0.7rem;
+    border: 1px solid var(--border);
+    border-radius: 0.65rem;
+    background: var(--surface);
+    color: var(--foreground);
+    box-shadow: var(--shadow);
+    font-size: 0.85rem;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.christmasLights::before {
+    position: absolute;
+    top: 0;
+    right: 2%;
+    left: 2%;
+    border-top: 1px solid rgb(75 78 59 / 55%);
+    content: "";
+}
+
+.light {
+    position: relative;
+    width: 7px;
+    height: 13px;
+    border-radius: 50% 50% 45% 45%;
+    animation: twinkle 1.2s ease-in-out infinite alternate;
+}
+
+.light:nth-child(4n + 1) {
+    transform: translateY(-3px);
+}
+
+.light:nth-child(4n + 2) {
+    transform: translateY(2px);
+}
+
+.light:nth-child(4n + 3) {
+    transform: translateY(-1px);
+}
+
+.light:nth-child(4n) {
+    transform: translateY(1px);
+}
+
+.light:nth-child(4n + 1) {
+    background: #e85d5d;
+    box-shadow: 0 0 9px 3px rgb(232 93 93 / 70%), 0 0 18px 5px rgb(232 93 93 / 32%);
+}
+
+.light:nth-child(4n + 2) {
+    background: #e8c85d;
+    box-shadow: 0 0 9px 3px rgb(232 200 93 / 70%), 0 0 18px 5px rgb(232 200 93 / 30%);
+}
+
+.light:nth-child(4n + 3) {
+    background: #65bd82;
+    box-shadow: 0 0 9px 3px rgb(101 189 130 / 70%), 0 0 18px 5px rgb(101 189 130 / 30%);
+}
+
+.light:nth-child(4n) {
+    background: #69a9e8;
+    box-shadow: 0 0 9px 3px rgb(105 169 232 / 70%), 0 0 18px 5px rgb(105 169 232 / 30%);
+}
+
+.snowfall {
+    position: fixed;
+    z-index: 20;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.snowflake {
+    position: absolute;
+    top: -10px;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 85%);
+    box-shadow: 0 0 2px 1px rgb(65 80 95 / 70%), 0 0 5px 2px rgb(65 80 95 / 35%), 0 0 4px rgb(255 255 255 / 55%);
+    animation: snowfall linear infinite;
+}
+
+@keyframes twinkle {
+    from {
+        opacity: 0.55;
+        filter: brightness(0.85);
+    }
+
+    to {
+        opacity: 1;
+        filter: brightness(1.15);
+    }
+}
+
+@keyframes snowfall {
+    to {
+        transform: translate3d(24px, 110vh, 0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .light {
+        animation: none;
+    }
+
+    .snowfall {
+        display: none;
+    }
+}
